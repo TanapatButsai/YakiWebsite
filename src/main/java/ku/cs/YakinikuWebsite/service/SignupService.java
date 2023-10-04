@@ -1,11 +1,11 @@
 package ku.cs.YakinikuWebsite.service;
 
-import ku.cs.YakinikuWebsite.entity.Employee;
+import ku.cs.YakinikuWebsite.entity.Member;
 import ku.cs.YakinikuWebsite.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
+import ku.cs.YakinikuWebsite.status.Role;
 
 @Service
 public class SignupService {
@@ -24,11 +24,11 @@ public class SignupService {
     }
 
 
-    public void createUser(Employee user) {
-        Employee record = new Employee();
+    public void createUser(Member user) {
+        Member record = new Member();
         record.setName(user.getName());
         record.setUsername(user.getUsername());
-        record.setRole("ROLE_USER");
+        record.setRole("CUSTOMER");
 
 
         String hashedPassword = passwordEncoder.encode(user.getPassword());
@@ -39,7 +39,7 @@ public class SignupService {
     }
 
 
-    public Employee getUser(String username) {
+    public Member getUser(String username) {
         return repository.findByUsername(username);
     }
 }

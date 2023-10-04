@@ -1,6 +1,6 @@
 package ku.cs.YakinikuWebsite.service;
 
-import ku.cs.YakinikuWebsite.entity.Employee;
+import ku.cs.YakinikuWebsite.entity.Member;
 import ku.cs.YakinikuWebsite.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -25,7 +25,7 @@ public class UserDetailsServiceImp implements UserDetailsService {
             throws UsernameNotFoundException {
 
 
-        Employee user = userRepository.findByUsername(username);
+        Member user = userRepository.findByUsername(username);
 
 
         if (user == null) {
