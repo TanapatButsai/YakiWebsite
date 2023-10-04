@@ -22,5 +22,9 @@ public class Member {
     private String username;
     private String password;
     private String name;
+    private int countLogin;
 
+    public Member() {
+        this.countLogin = 0;
+    }
 }

@@ -6,25 +6,28 @@
   <title>Kafe Web Application</title>
   <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
   <script th:src="@{/js/bootstrap.min.js}"></script>
+
 </head>
 <body>
 
 <div th:insert="~{fragments/header :: header}"></div>
 
-<div class="container">
-  <h1 class="display-6">Welcome to Kafe</h1>
-
+<div class="container" >
+  <h1 class="display-6" style="text-align: center;">Welcome to Kafe</h1>
+  <div>
+    <!-- Use the 'responsive-img' class to style the image -->
+    <img  class="responsive-img" src="https://thestandard.co/wp-content/uploads/2021/11/Yakiniku-Like17.jpg" >
+  </div>
   <p><span th:text="${greeting}"></span></p>
 
-  <div sec:authorize="isAuthenticated()">
-    <p>Khun <b><span sec:authentication="name"></span></b></p>
-    <a class="btn btn-primary" th:href="@{/logout}">Logout</a>
+  <div sec:authorize="isAnonymous()" style="text-align: center;" >
+
   </div>
-  <div sec:authorize="isAnonymous()">
-    <a class="btn btn-primary" th:href="@{/login}">Login</a>
-    <a class="btn btn-light" th:href="@{/signup}">Sign Up</a>
+  <div sec:authorize="isAuthenticated()" style="text-align: center;">
+    <a id="start-order" th:href="@{/home.html}" class="btn btn-dark">เริ่มสั่งพิซซ่า ซื้อ 1 แถม 1 ได้เลย!</a>
   </div>
 </div>
+<a class="btn btn-light" th:href="@{/change_password}">change password</a>
 
 </body>
 </html>

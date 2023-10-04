@@ -1,33 +1,38 @@
 package ku.cs.YakinikuWebsite.service;
 
 import ku.cs.YakinikuWebsite.entity.Member;
-import ku.cs.YakinikuWebsite.repository.EmployeeRepository;
+import org.modelmapper.ModelMapper;
+import ku.cs.YakinikuWebsite.repository.MemberRepository;
+import ku.cs.YakinikuWebsite.model.SignupRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import ku.cs.YakinikuWebsite.status.Role;
 
 @Service
 public class SignupService {
 
 
     @Autowired
-    private EmployeeRepository repository;
+    private MemberRepository repository;
 
 
     @Autowired
     private PasswordEncoder passwordEncoder;
 
 
+
+    @Autowired
+    private ModelMapper modelMapper;
+
     public boolean isUsernameAvailable(String username) {
         return repository.findByUsername(username) == null;
     }
 
 
-    public void createUser(Member user) {
-        Member record = new Member();
-        record.setName(user.getName());
-        record.setUsername(user.getUsername());
+    public void createUser(SignupRequest user) {
+        Member record = modelMapper.map(user, Member.class);
+//        record.setName(user.getName());
+//        record.setUsername(user.getUsername());
         record.setRole("CUSTOMER");
 
 

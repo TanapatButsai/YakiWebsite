@@ -35,4 +35,6 @@ public class AuthController {
         // แต่โดยทั่วไป ควรกลับมาที่หน้า login
         return "redirect:/login?logout";
     }
+
+
 }

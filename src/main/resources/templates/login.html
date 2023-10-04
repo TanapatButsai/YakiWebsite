@@ -7,44 +7,31 @@
     <script th:src="@{/js/bootstrap.min.js}"></script>
 </head>
 <body>
-
-
+<div th:insert="~{fragments/header :: header}"></div>
 <div class="container w-50 p-3">
-    <h1 class="display-5">Sign Up</h1>
+    <h1 class="display-5">Login</h1>
 
-
-    <form action="#" th:action="@{/signup}" method="POST">
-
-
-        <div id="success-msg" class="alert alert-success"
-             th:if="${signupSuccess}">
-            Successfully signed up! Please <a th:href="@{/login}">login</a>.
+    <form th:action="@{/login}" method="POST">
+        <div id="error-msg" th:if="${param.error}" class="alert alert-danger">
+            Invalid username or password
         </div>
-        <div id="error-msg" class="alert alert-danger"
-             th:if="${signupError}">
-            <span th:text="${signupError}"></span>
-        </div>
-
-
-        <div class="mb-3">
-            <label for="inputName">Name</label>
-            <input id="inputName" type="input" class="form-control"
-                   name="name">
+        <div id="logout-msg" th:if="${param.logout}" class="alert alert-success">
+            You have been logged out
         </div>
         <div class="mb-3">
             <label for="inputUsername">Username</label>
-            <input id="inputUsername" type="input" class="form-control"
-                   name="username">
+            <input type="text" name="username" id="inputUsername"
+                   class="form-control" required>
         </div>
         <div class="mb-3">
             <label for="inputPassword">Password</label>
-            <input id="inputPassword" type="password" class="form-control"
-                   name="password">
+            <input type="password" name="password" id="inputPassword"
+                   class="form-control" required>
         </div>
-        <button id="submit-button" type="submit" class="btn btn-primary">Sign Up</button>
+        <button id="submit-button" type="submit" class="btn btn-primary">Login</button>
+        <a class="btn btn-light" th:href="@{/change_password}">change password</a>
     </form>
 </div>
-
 
 </body>
 </html>

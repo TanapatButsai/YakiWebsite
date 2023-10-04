@@ -1,6 +1,6 @@
 package ku.cs.YakinikuWebsite.controller;
 
-import ku.cs.YakinikuWebsite.entity.Member;
+import ku.cs.YakinikuWebsite.model.SignupRequest;
 import ku.cs.YakinikuWebsite.service.SignupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,7 +25,7 @@ public class SignupController {
 
 
     @PostMapping("/signup")
-    public String signupUser(@ModelAttribute Member user, Model model) {
+    public String signupUser(@ModelAttribute SignupRequest user, Model model) {
 
 
         if (signupService.isUsernameAvailable(user.getUsername())) {

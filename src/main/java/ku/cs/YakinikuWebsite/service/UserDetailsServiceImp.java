@@ -1,7 +1,7 @@
 package ku.cs.YakinikuWebsite.service;
 
 import ku.cs.YakinikuWebsite.entity.Member;
-import ku.cs.YakinikuWebsite.repository.EmployeeRepository;
+import ku.cs.YakinikuWebsite.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,7 +17,7 @@ public class UserDetailsServiceImp implements UserDetailsService {
 
 
     @Autowired
-    private EmployeeRepository userRepository;
+    private MemberRepository userRepository;
 
 
     @Override
