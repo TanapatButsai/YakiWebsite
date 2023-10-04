@@ -12,19 +12,21 @@
 
 <div th:insert="~{fragments/header :: header}"></div>
 
+<div>
+  <img  class="responsive-img " src="image/yaki.jpeg"  alt="yakie">
+</div>
+
 <div class="container" >
   <h1 class="display-6" style="text-align: center;">Welcome to Kafe</h1>
-  <div>
-    <!-- Use the 'responsive-img' class to style the image -->
-    <img  class="responsive-img" src="https://thestandard.co/wp-content/uploads/2021/11/Yakiniku-Like17.jpg" >
-  </div>
+
+
   <p><span th:text="${greeting}"></span></p>
 
   <div sec:authorize="isAnonymous()" style="text-align: center;" >
 
   </div>
   <div sec:authorize="isAuthenticated()" style="text-align: center;">
-    <a id="start-order" th:href="@{/home.html}" class="btn btn-dark">เริ่มสั่งพิซซ่า ซื้อ 1 แถม 1 ได้เลย!</a>
+    <a id="start-order" th:href="@{/home.html}" class="btn btn-dark">เริ่มสั่งอาหารได้เลย</a>
   </div>
 </div>
 <a class="btn btn-light" th:href="@{/change_password}">change password</a>
