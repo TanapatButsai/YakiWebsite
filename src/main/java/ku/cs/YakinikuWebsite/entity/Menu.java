@@ -3,6 +3,7 @@ package ku.cs.YakinikuWebsite.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import lombok.Data;
 
 import java.util.UUID;
@@ -16,7 +17,9 @@ public class Menu {
 
     private String name;
     private double price;
+    @ManyToOne
+    private Category category;
 
-
+    private String menuImage;
 
 }
