@@ -17,15 +17,10 @@ public class Member {
     @Id
     @GeneratedValue
     private UUID id;
-
     private String role;
     private String username;
     private String password;
     private String name;
-    private int countLogin;
     private String email;
 
-    public Member() {
-        this.countLogin = 0;
-    }
 }
