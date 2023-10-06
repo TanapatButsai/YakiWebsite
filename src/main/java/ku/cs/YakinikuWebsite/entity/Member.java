@@ -23,6 +23,7 @@ public class Member {
     private String password;
     private String name;
     private int countLogin;
+    private String email;
 
     public Member() {
         this.countLogin = 0;

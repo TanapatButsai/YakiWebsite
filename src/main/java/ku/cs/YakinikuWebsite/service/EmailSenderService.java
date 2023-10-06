@@ -7,6 +7,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -16,11 +17,11 @@ import java.io.File;
 public class EmailSenderService {
 
     @Autowired
-    private MemberRepository memberRepository;
-    @Autowired
     private JavaMailSender mailSender;
 
-    public void sendSimpleEmail(String toEmail,
+    @Autowired
+    private MemberRepository memberRepository;
+    public void sendEmail(String toEmail,
                                 String subject,
                                 String body
     ) {
@@ -31,9 +32,13 @@ public class EmailSenderService {
         message.setSubject(subject);
         mailSender.send(message);
         System.out.println("Mail Send...");
-
-
     }
+    	public void triggerMail(String username) throws MessagingException {
+		sendEmail(memberRepository.findByUsername(username).getEmail(),
+				"Yakiniku Delivery Submitted order",
+				"You have ordered food from Yakiniku Delivery! " +"\n"+
+                        "We will notify you if the order is confirmed.");
 
+	}
 }
 
