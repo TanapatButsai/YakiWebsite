@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Kafe Application</title>
+    <title>Yakiniku Application</title>
     <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <script th:src="@{/js/bootstrap.min.js}"></script>
     <style>
@@ -21,8 +21,7 @@
         <img   th:height="290px" src="https://previews.dropbox.com/p/thumb/ACBp48yz1IZ1CmTYWSWq6v_s023sLiRbGanGVoYF7-8FLfof43h1apMd2eWWTl6UXVqLsze_9bHuUMGN6GB74V9uLbOVMXlmiNNc5x1uN2sL2txSUa_x4-HPfqIr9Ya-ep1RO4H1T8obWnWcU0od-WMCudyv2T2xsPZ2-NcvhOD4-o0aQysgSKpHwuxsVF_5FUhtDGdfwGo23WBLdZksDDXSWLoLNlktt5UMB7z8kl4hrTySB9LFYlfh-bkOSs8ZAZO_MbeQg3gGltECTdFRkcSqQ6liCp3ZG8RW62MLhbC8ieUAkb7dZh9q8IDMXbbJ10F0XLAD-tem5pyF48d9o18Z/p.jpeg" alt="Image Button" />
     </a>
 </div>
-<h1>
-    MENUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+<h1>Menu
 </h1>
 
 <div class="container w-50 p-3">
@@ -32,7 +31,7 @@
     <table th:each="category : ${categories}" class="table table-bordered table-striped table-hover">
         <thead class="thead-dark">
         <tr class="table-dark">
-            <td colspan="2"><span th:text="${category.name}"></span></td>
+            <td colspan="3"><span th:text="${category.name}"></span></td>
 
         </tr>
         </thead>
@@ -40,6 +39,10 @@
         <tr th:each="menu : ${category.menus}">
             <td th:text="${menu.name}"></td>
             <td style="text-align: right" th:text="${#numbers.formatDecimal(menu.price, 1, 'COMMA', 2, 'POINT')}"></td>
+            <td style="text-align: center">
+                <a class="btn btn-primary"
+                   th:href="@{/menus/{id}(id=${menu.id})}">View</a>
+            </td>
         </tr>
         </tbody>
     </table>
