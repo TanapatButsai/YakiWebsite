@@ -28,11 +28,11 @@ public class SignupController {
     public String signupUser(@ModelAttribute SignupRequest user, Model model) {
 
 
-        if (signupService.isUsernameAvailable(user.getUsername())) {
+        if (signupService.isUsernameAvailable(user.getUsername()) && signupService.isEmailAvailable(user.getEmail())) {
             signupService.createUser(user);
             model.addAttribute("signupSuccess", true);
         } else {
-            model.addAttribute("signupError", "Username not available");
+            model.addAttribute("signupError", "Username or Email not available");
         }
         // return หน้าฟอร์ม signup.html เช่นกัน แต่จะมี message ปรากฎ
         return "signup";

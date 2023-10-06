@@ -5,6 +5,15 @@
     <title>Yakiniku Application</title>
     <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <script th:src="@{/js/bootstrap.min.js}"></script>
+    <style>
+        /* Add your custom CSS here */
+        .container {
+            background-color: #d7d8da; /* Replace with your desired background color */
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 80px;
+        }
+    </style>
 </head>
 <body>
 <div th:insert="~{fragments/header :: header}"></div>
@@ -37,10 +46,18 @@
                    name="username">
         </div>
         <div class="mb-3">
+            <label for="inputEmail">E-mail</label>
+            <input id="inputEmail" type="input" class="form-control"
+                   name="email">
+        </div>
+        <div class="mb-3">
             <label for="inputPassword">Password</label>
             <input id="inputPassword" type="password" class="form-control"
                    name="password">
         </div>
+
+
+
         <button id="submit-button" type="submit" class="btn btn-primary">Sign Up</button>
     </form>
 </div>

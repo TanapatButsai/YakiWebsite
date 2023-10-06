@@ -27,14 +27,15 @@ public class SignupService {
     public boolean isUsernameAvailable(String username) {
         return repository.findByUsername(username) == null;
     }
-
+    public boolean isEmailAvailable(String email) {
+        return repository.findByEmail(email) == null;
+    }
 
     public void createUser(SignupRequest user) {
         Member record = modelMapper.map(user, Member.class);
 //        record.setName(user.getName());
 //        record.setUsername(user.getUsername());
         record.setRole("CUSTOMER");
-
 
         String hashedPassword = passwordEncoder.encode(user.getPassword());
         record.setPassword(hashedPassword);
