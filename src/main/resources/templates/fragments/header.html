@@ -32,6 +32,7 @@
                 <li class="nav-item">
                     <a class="btn btn-primary" th:href="@{/logout}">Logout</a>
                 </li>
+                <a class="btn btn-light" th:href="@{/change_password}">change password</a>
             </ul>
         </div>
         <div sec:authorize="isAnonymous()">
@@ -39,6 +40,7 @@
                 <li class="nav-item">
                     <a class="btn btn-primary" th:href="@{/login}">Login</a>
                     <a class="btn btn-light" th:href="@{/signup}">Sign Up</a>
+
                 </li>
             </ul>
         </div>

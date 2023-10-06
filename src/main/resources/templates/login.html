@@ -5,10 +5,19 @@
     <title>Kafe Application</title>
     <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <script th:src="@{/js/bootstrap.min.js}"></script>
+    <style>
+        /* Add your custom CSS here */
+        .container {
+            background-color: #d7d8da; /* Replace with your desired background color */
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 80px;
+        }
+    </style>
 </head>
 <body>
 <div th:insert="~{fragments/header :: header}"></div>
-<div class="container w-50 p-3">
+<div class="container w-50 p-3" >
     <h1 class="display-5">Login</h1>
 
     <form th:action="@{/login}" method="POST">
@@ -29,7 +38,7 @@
                    class="form-control" required>
         </div>
         <button id="submit-button" type="submit" class="btn btn-primary">Login</button>
-        <a class="btn btn-light" th:href="@{/change_password}">change password</a>
+
     </form>
 </div>
 <div>
