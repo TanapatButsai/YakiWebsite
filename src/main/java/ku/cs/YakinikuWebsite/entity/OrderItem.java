@@ -26,5 +26,11 @@ public class OrderItem {
     @MapsId("menuId")
     @JoinColumn(name = "menu_id")
     private Menu menu;
+
+
+    public double getSubtotal() {
+        return menu.getPrice() * quantity;
+    }
+
 }
 

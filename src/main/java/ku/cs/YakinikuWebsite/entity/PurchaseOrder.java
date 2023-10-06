@@ -25,6 +25,12 @@ public class PurchaseOrder {
     private LocalDateTime timestamp;
     private Status status;
 
+    public double getTotal() {
+        double total = 0;
+        for (OrderItem item : items)
+            total += item.getSubtotal();
+        return total;
+    }
 
     @OneToMany(mappedBy = "purchaseOrder")
     private List<OrderItem> items = new ArrayList<>();

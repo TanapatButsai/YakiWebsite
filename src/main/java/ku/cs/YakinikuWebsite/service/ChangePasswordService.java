@@ -2,7 +2,6 @@ package ku.cs.YakinikuWebsite.service;
 
 import ku.cs.YakinikuWebsite.entity.Member;
 import ku.cs.YakinikuWebsite.model.ChangePasswordRequest;
-import ku.cs.YakinikuWebsite.model.ChangePasswordResult;
 import ku.cs.YakinikuWebsite.repository.MemberRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
