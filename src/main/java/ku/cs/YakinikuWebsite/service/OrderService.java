@@ -1,14 +1,13 @@
 package ku.cs.YakinikuWebsite.service;
 
-import ku.cs.YakinikuWebsite.entity.Menu;
-import ku.cs.YakinikuWebsite.entity.OrderItem;
-import ku.cs.YakinikuWebsite.entity.OrderItemKey;
-import ku.cs.YakinikuWebsite.entity.PurchaseOrder;
+import ku.cs.YakinikuWebsite.entity.*;
 import ku.cs.YakinikuWebsite.model.AddCartRequest;
+import ku.cs.YakinikuWebsite.repository.MemberRepository;
 import ku.cs.YakinikuWebsite.repository.MenuRepository;
 import ku.cs.YakinikuWebsite.repository.OrderItemRepository;
 import ku.cs.YakinikuWebsite.repository.PurchaseOrderRepository;
 import ku.cs.YakinikuWebsite.status.Status;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
@@ -27,24 +26,33 @@ public class OrderService {
     @Autowired
     private OrderItemRepository itemRepository;
 
+    @Autowired
+    private MemberRepository memberRepository;
+
 
     @Autowired
     private MenuRepository menuRepository;
+
+    @Autowired
+    private ModelMapper modelMapper;
+
+    //private Member member;
 
 
     private UUID currentOrderId;
 
 
-    public void createNewOrder() {
+    public void createNewOrder(Member member) {
         PurchaseOrder newOrder = new PurchaseOrder();
         newOrder.setStatus(Status.ORDER);
+        newOrder.setMember(memberRepository.findById(member.getId()).get());
         PurchaseOrder record = orderRepository.save(newOrder);
         currentOrderId = record.getId();
     }
 
-    public PurchaseOrder getCurrentOrder() {
+    public PurchaseOrder getCurrentOrder(Member member) {
         if (currentOrderId == null)
-            createNewOrder();
+            createNewOrder(member);
         return orderRepository.findById(currentOrderId).get();
     }
 
@@ -58,9 +66,9 @@ public class OrderService {
         currentOrderId = null;
     }
 
-    public void order(UUID menuId, AddCartRequest request) {
+    public void order(UUID menuId, AddCartRequest request,Member member) {
         if (currentOrderId == null)
-            createNewOrder();
+            createNewOrder(member);
 
 
         PurchaseOrder currentOrder =

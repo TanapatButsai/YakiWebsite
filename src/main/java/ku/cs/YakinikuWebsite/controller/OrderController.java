@@ -3,7 +3,6 @@ package ku.cs.YakinikuWebsite.controller;
 
 import ku.cs.YakinikuWebsite.entity.Member;
 import ku.cs.YakinikuWebsite.model.AddCartRequest;
-import ku.cs.YakinikuWebsite.repository.MemberRepository;
 import ku.cs.YakinikuWebsite.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -28,8 +27,8 @@ public class OrderController {
     @Autowired
     private EmailSenderService senderService;
     @GetMapping
-    public String viewCart(Model model) {
-        model.addAttribute("cart", orderService.getCurrentOrder());
+    public String viewCart(@ModelAttribute Member member, Model model) {
+        model.addAttribute("cart", orderService.getCurrentOrder(member));
         return "cart";
     }
 
@@ -47,8 +46,8 @@ public class OrderController {
 
     @PostMapping("/{menuId}")
     public String order(@PathVariable UUID menuId,
-                        @ModelAttribute AddCartRequest request, Model model){
-        orderService.order(menuId, request);
+                        @ModelAttribute AddCartRequest request, @ModelAttribute Member member,Model model){
+        orderService.order(menuId, request,member);
         return "redirect:/menus";
     }
 }

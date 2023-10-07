@@ -1,9 +1,6 @@
 package ku.cs.YakinikuWebsite.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import ku.cs.YakinikuWebsite.status.Status;
 import lombok.Data;
 
@@ -21,6 +18,8 @@ public class PurchaseOrder {
     @GeneratedValue
     private UUID id;
 
+    @ManyToOne
+    private Member member;
 
     private LocalDateTime timestamp;
     private Status status;
