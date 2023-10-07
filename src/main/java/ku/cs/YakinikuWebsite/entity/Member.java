@@ -26,8 +26,7 @@ public class Member {
     private String name;
     private String email;
 
-    @OneToMany(mappedBy = "member")
-    List<PurchaseOrder> purchaseOrderList = new ArrayList<>();
-
+    @OneToMany(mappedBy = "member") // "member" is the name of the field in the PurchaseOrder class
+    private List<PurchaseOrder> purchaseOrders = new ArrayList<>();
 
 }

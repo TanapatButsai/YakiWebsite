@@ -7,7 +7,6 @@ import ku.cs.YakinikuWebsite.repository.MenuRepository;
 import ku.cs.YakinikuWebsite.repository.OrderItemRepository;
 import ku.cs.YakinikuWebsite.repository.PurchaseOrderRepository;
 import ku.cs.YakinikuWebsite.status.Status;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
@@ -26,33 +25,28 @@ public class OrderService {
     @Autowired
     private OrderItemRepository itemRepository;
 
-    @Autowired
-    private MemberRepository memberRepository;
-
 
     @Autowired
     private MenuRepository menuRepository;
 
     @Autowired
-    private ModelMapper modelMapper;
-
-    //private Member member;
-
-
+    private MemberRepository memberRepository;
     private UUID currentOrderId;
 
 
-    public void createNewOrder(Member member) {
+    public void createNewOrder(String username) {
+        Member member = memberRepository.findByUsername(username);
+
         PurchaseOrder newOrder = new PurchaseOrder();
+        newOrder.setMember(member);
         newOrder.setStatus(Status.ORDER);
-        //newOrder.setMember(memberRepository.findById(member.getId()).get());
         PurchaseOrder record = orderRepository.save(newOrder);
         currentOrderId = record.getId();
     }
 
-    public PurchaseOrder getCurrentOrder(Member member) {
+    public PurchaseOrder getCurrentOrder(String username) {
         if (currentOrderId == null)
-            createNewOrder(member);
+            createNewOrder(username);
         return orderRepository.findById(currentOrderId).get();
     }
 
@@ -66,9 +60,9 @@ public class OrderService {
         currentOrderId = null;
     }
 
-    public void order(UUID menuId, AddCartRequest request,Member member) {
+    public void order(UUID menuId, AddCartRequest request,String username) {
         if (currentOrderId == null)
-            createNewOrder(member);
+            createNewOrder(username);
 
 
         PurchaseOrder currentOrder =
@@ -98,4 +92,3 @@ public class OrderService {
         orderRepository.save(record);
     }
 }
-

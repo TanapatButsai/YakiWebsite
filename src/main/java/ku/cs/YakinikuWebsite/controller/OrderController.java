@@ -26,9 +26,11 @@ public class OrderController {
 
     @Autowired
     private EmailSenderService senderService;
+
+
     @GetMapping
-    public String viewCart(@ModelAttribute Member member, Model model) {
-        model.addAttribute("cart", orderService.getCurrentOrder(member));
+    public String viewCart(Model model,Authentication authentication) {
+        model.addAttribute("cart", orderService.getCurrentOrder(authentication.getName()));
         return "cart";
     }
 
@@ -46,8 +48,8 @@ public class OrderController {
 
     @PostMapping("/{menuId}")
     public String order(@PathVariable UUID menuId,
-                        @ModelAttribute AddCartRequest request, @ModelAttribute Member member,Model model){
-        orderService.order(menuId, request,member);
+                        @ModelAttribute AddCartRequest request, Model model,Authentication authentication){
+        orderService.order(menuId, request,authentication.getName());
         return "redirect:/menus";
     }
 }

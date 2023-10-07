@@ -24,12 +24,18 @@ public class PurchaseOrder {
     private LocalDateTime timestamp;
     private Status status;
 
+
+    private UUID uuid;
     public double getTotal() {
         double total = 0;
         for (OrderItem item : items)
             total += item.getSubtotal();
         return total;
     }
+
+    @ManyToOne
+    @JoinColumn(name = "member_id") // "member_id" is the foreign key column in the PurchaseOrder table
+    private Member member;
 
     @OneToMany(mappedBy = "purchaseOrder")
     private List<OrderItem> items = new ArrayList<>();
