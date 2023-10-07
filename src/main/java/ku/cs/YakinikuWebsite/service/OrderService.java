@@ -1,10 +1,8 @@
 package ku.cs.YakinikuWebsite.service;
 
-import ku.cs.YakinikuWebsite.entity.Menu;
-import ku.cs.YakinikuWebsite.entity.OrderItem;
-import ku.cs.YakinikuWebsite.entity.OrderItemKey;
-import ku.cs.YakinikuWebsite.entity.PurchaseOrder;
+import ku.cs.YakinikuWebsite.entity.*;
 import ku.cs.YakinikuWebsite.model.AddCartRequest;
+import ku.cs.YakinikuWebsite.repository.MemberRepository;
 import ku.cs.YakinikuWebsite.repository.MenuRepository;
 import ku.cs.YakinikuWebsite.repository.OrderItemRepository;
 import ku.cs.YakinikuWebsite.repository.PurchaseOrderRepository;
@@ -31,20 +29,24 @@ public class OrderService {
     @Autowired
     private MenuRepository menuRepository;
 
-
+    @Autowired
+    private MemberRepository memberRepository;
     private UUID currentOrderId;
 
 
-    public void createNewOrder() {
+    public void createNewOrder(String username) {
+        Member member = memberRepository.findByUsername(username);
+
         PurchaseOrder newOrder = new PurchaseOrder();
+        newOrder.setMember(member);
         newOrder.setStatus(Status.ORDER);
         PurchaseOrder record = orderRepository.save(newOrder);
         currentOrderId = record.getId();
     }
 
-    public PurchaseOrder getCurrentOrder() {
+    public PurchaseOrder getCurrentOrder(String username) {
         if (currentOrderId == null)
-            createNewOrder();
+            createNewOrder(username);
         return orderRepository.findById(currentOrderId).get();
     }
 
@@ -58,9 +60,9 @@ public class OrderService {
         currentOrderId = null;
     }
 
-    public void order(UUID menuId, AddCartRequest request) {
+    public void order(UUID menuId, AddCartRequest request,String username) {
         if (currentOrderId == null)
-            createNewOrder();
+            createNewOrder(username);
 
 
         PurchaseOrder currentOrder =

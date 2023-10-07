@@ -1,9 +1,6 @@
 package ku.cs.YakinikuWebsite.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import ku.cs.YakinikuWebsite.status.Status;
 import lombok.Data;
 
@@ -25,12 +22,18 @@ public class PurchaseOrder {
     private LocalDateTime timestamp;
     private Status status;
 
+
+    private UUID uuid;
     public double getTotal() {
         double total = 0;
         for (OrderItem item : items)
             total += item.getSubtotal();
         return total;
     }
+
+    @ManyToOne
+    @JoinColumn(name = "member_id") // "member_id" is the foreign key column in the PurchaseOrder table
+    private Member member;
 
     @OneToMany(mappedBy = "purchaseOrder")
     private List<OrderItem> items = new ArrayList<>();
