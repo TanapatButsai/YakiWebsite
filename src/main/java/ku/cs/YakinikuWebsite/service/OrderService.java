@@ -45,7 +45,7 @@ public class OrderService {
     public void createNewOrder(Member member) {
         PurchaseOrder newOrder = new PurchaseOrder();
         newOrder.setStatus(Status.ORDER);
-        newOrder.setMember(memberRepository.findById(member.getId()).get());
+        //newOrder.setMember(memberRepository.findById(member.getId()).get());
         PurchaseOrder record = orderRepository.save(newOrder);
         currentOrderId = record.getId();
     }

@@ -15,10 +15,7 @@ public class Category {
     @Id
     @GeneratedValue
     private UUID id;
-
-
     private String name;
-
 
     @OneToMany(mappedBy = "category")
     List<Menu> menus;
