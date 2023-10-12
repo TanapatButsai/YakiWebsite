@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class SignupController {
 
-
+//    public static String uploadDirectory=System.getProperty("user.dir")+"/src/main/resources/templates/image";
     @Autowired
     private SignupService signupService;
 

@@ -26,6 +26,10 @@ public class Member {
     private String name;
     private String email;
 
+    public String getName() {
+        return name;
+    }
+
     @OneToMany(mappedBy = "member") // "member" is the name of the field in the PurchaseOrder class
     private List<PurchaseOrder> purchaseOrders = new ArrayList<>();
 

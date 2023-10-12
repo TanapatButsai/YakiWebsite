@@ -1,5 +1,7 @@
 package ku.cs.YakinikuWebsite;
 
+import ku.cs.YakinikuWebsite.controller.MenuController;
+import ku.cs.YakinikuWebsite.controller.SignupController;
 import ku.cs.YakinikuWebsite.service.EmailSenderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -8,6 +10,7 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 
 import javax.mail.MessagingException;
+import java.io.File;
 
 @SpringBootApplication
 public class YakinikuWebsiteApplication {

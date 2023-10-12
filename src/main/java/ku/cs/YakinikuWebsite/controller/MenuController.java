@@ -8,7 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.UUID;
 
 @Controller
@@ -26,6 +32,7 @@ public class MenuController {
 
         return "menu-all";
     }
+    //public static String uploadDirectory=System.getProperty("user.dir")+"/src/main/resources/templates/image";
 
     @GetMapping("/add")
     public String getMenuForm(Model model) {
@@ -42,6 +49,12 @@ public class MenuController {
 
     @PostMapping("/add")
     public String createMenu(@ModelAttribute MenuRequest menu, Model model) {
+//        StringBuilder fileNames = new StringBuilder();
+//        String filename = menu.getName()+ file.getOriginalFilename().substring(file.getOriginalFilename().length()-4);
+//        Path fileNameAndPath = Paths.get(uploadDirectory,filename);
+//        Files.write(fileNameAndPath,file.getBytes());
+//
+//        menu.setMenuImage(filename);
         menuService.createMenu(menu);
         return "redirect:/menus";
     }

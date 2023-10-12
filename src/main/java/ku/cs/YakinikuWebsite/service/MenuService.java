@@ -8,6 +8,9 @@ import ku.cs.YakinikuWebsite.repository.MenuRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import org.thymeleaf.util.StringUtils;
+
 
 import java.util.List;
 import java.util.UUID;
@@ -24,6 +27,8 @@ public class MenuService {
     @Autowired
     private CategoryRepository categoryRepository;
 
+
+
     public List<Menu> getAllMenu(){
         return menuRepository.findAll();
     }
@@ -39,5 +44,6 @@ public class MenuService {
                 categoryRepository.findById(request.getCategoryId()).get();
         record.setCategory(category);
         menuRepository.save(record);
+
     }
 }

@@ -9,4 +9,5 @@ public class MenuRequest {
     private String name;
     private double price;
     private UUID categoryId;
+    private String menuImage;
 }
