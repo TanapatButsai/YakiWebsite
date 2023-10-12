@@ -48,7 +48,6 @@ public class SecurityConfig {
                         .deleteCookies("JSESSIONID", "remember-me")
                         .permitAll()
                 );
-
         return http.build();
     }
 
