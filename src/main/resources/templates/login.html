@@ -5,14 +5,35 @@
     <title>Yakiniku Application</title>
     <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <script th:src="@{/js/bootstrap.min.js}"></script>
+
+    <link rel="stylesheet" href="/css/custom.css">
+
+    <!---Swiper--->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+
+    <!---Font Awesome--->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <script th:src="@{/js/bootstrap.min.js}"></script>
     <style>
         /* Add your custom CSS here */
         .container {
-            background-color: #d7d8da; /* Replace with your desired background color */
+            background-color: rgba(220, 145, 104, 0.93); /* Replace with your desired background color */
             border-radius: 10px;
             padding: 20px;
-            margin-top: 80px;
+            margin-top: 150px;
+
         }
+
+        .display-5{
+            text-align: center;
+            color: #eeeeee;
+        }
+
+        .mb-3{
+            color: white;
+        }
+
     </style>
 </head>
 <body>
@@ -37,12 +58,12 @@
             <input type="password" name="password" id="inputPassword"
                    class="form-control" required>
         </div>
-        <button id="submit-button" type="submit" class="btn btn-primary">Login</button>
+        <button id="submit-button" type="submit" class="btn">Login</button>
 
     </form>
 </div>
 <div>
-    <img  class="responsive-img " src="image/yaki.jpeg"  alt="yakie">
+    <img class="responsive-img " src="../static/images/yaki1.png" alt="yakie">
 </div>
 </body>
 </html>

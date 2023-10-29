@@ -5,36 +5,385 @@
   <meta charset="UTF-8">
   <title>Yakiniku Application</title>
   <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+  <link rel="stylesheet" href="/css/custom.css">
+
+  <!---Swiper--->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+
+  <!---Font Awesome--->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
   <script th:src="@{/js/bootstrap.min.js}"></script>
 
-
 </head>
-<body>
 
-<div th:insert="~{fragments/header :: header}"></div>
+  <div th:insert="~{fragments/header :: header}"></div>
 
-<div class="image-banner" >
-  <a href="#" >
-    <img   th:height="1280px" src="https://www.ryt9.com/img/files/20220623/iq178d449425a0813e15d348603cf5d22c.jpg" alt="Image Button" />
-  </a>
-</div>
+  <!---Home Section--->
+  <div id="success-msg" class="alert alert-success" th:if="${confirmOrder}"> Your order has been successfully submitted !</div>
 
-<div class="container"  >
-  <h1 class="display-6" style="text-align: center;">Welcome to Kafe</h1>
+  <section class="home" id = "home">
 
-  <p><span th:text="${greeting}"></span></p>
+  <div class="swiper-container home-slider">
 
-  <div id="success-msg" class="alert alert-success"
-       th:if="${confirmOrder}">
-    Your order has been successfully submitted !
+    <div class="swiper-wrapper wrapper">
+      <!-- 1 -->
+      <div class="swiper-slide slide">
+        <div class="content">
+          <span>เมนูของเรา</span>
+          <h3>Pork Karubi Set (145 บาท)</h3>
+          <p>- ขายขั้นต่ำ 1 แพค (นน. 100 กรัม)<br />
+            - ราคาสินค้าอาจมีการเปลี่ยนแปลงรบกวนเช็คกับแอดมินอีกครั้งทางไลน์<br />
+            - ราคาสินค้าไม่รวมค่าจัดส่ง<br />
+            - มีบริการ ตัดและแวคคั่มสูญญากาศ<br />
+            - ค่าจัดส่งคิดตามระยะทาง จัดส่งทั่วไทย<br />
+          </p>
+          <a th:href="@{/menus}" class ="btn fas fa-shopping-cart">Add to Cart</a>
+        </div>
+        <div class="image">
+          <img src="/images/PorkKarubiSet.jpg" alt="">
+        </div>
+      </div>
+
+      <!-- 2 -->
+
+      <div class="swiper-slide slide">
+        <div class="content">
+          <span>เมนูของเรา</span>
+          <h3>Karubi Set (155 บาท)</h3>
+          <p>- ขายขั้นต่ำ 1 แพค (นน. 100 กรัม)<br />
+            - ราคาสินค้าอาจมีการเปลี่ยนแปลงรบกวนเช็คกับแอดมินอีกครั้งทางไลน์<br />
+            - ราคาสินค้าไม่รวมค่าจัดส่ง<br />
+            - มีบริการ ตัดและแวคคั่มสูญญากาศ<br />
+            - ค่าจัดส่งคิดตามระยะทาง จัดส่งทั่วไทย<br />
+          </p>
+          <a th:href="@{/menus}" class ="btn fas fa-shopping-cart">Add to Cart</a>
+        </div>
+        <div class="image">
+          <img src="/images/KarubiSet.jpg" alt="">
+        </div>
+      </div>
+
+      <!-- 3 -->
+
+      <div class="swiper-slide slide">
+        <div class="content">
+          <span>เมนูของเรา</span>
+          <h3>Like Set (289 บาท)</h3>
+          <p>- ขายขั้นต่ำ 1 แพค (นน. 150 กรัม)<br />
+            - ราคาสินค้าอาจมีการเปลี่ยนแปลงรบกวนเช็คกับแอดมินอีกครั้งทางไลน์<br />
+            - ราคาสินค้าไม่รวมค่าจัดส่ง<br />
+            - มีบริการ ตัดและแวคคั่มสูญญากาศ<br />
+            - ค่าจัดส่งคิดตามระยะทาง จัดส่งทั่วไทย<br />
+          </p>
+          <a th:href="@{/menus}" class ="btn fas fa-shopping-cart">Add to Cart</a>
+        </div>
+        <div class="image">
+          <img src="/images/LikeSet.jpg" alt="">
+        </div>
+      </div>
+
+    </div>
+
+    <div class="swiper-pagination"></div>
+
   </div>
 
-  <div sec:authorize="isAnonymous()" style="text-align: center;" >
-  </div>
-  <div sec:authorize="isAuthenticated()" style="text-align: center;">
-    <a id="start order button" th:href="@{/menus}" class="btn btn-dark">เริ่มสั่งอาหารได้เลย</a>
-  </div>
-</div>
+  </section>
+  <!---Home Section--->
 
-</body>
+  <!-- dishes section starts -->
+
+  <section class="dishes" id="dishes">
+
+  <h1 class="heading">Optional Menu</h1>
+
+    <div class="box-container">
+
+      <!-- 1 -->
+      <div class="box">
+        <img src="/images/KarubiSukiyaki.png" alt="">
+        <h3>Karubi Sukiyaki</h3>
+        <div class="stars">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star-half-alt"></i>
+        </div>
+        <span>115฿</span>
+        <a th:href="@{/menus}" class="btn">Add to Cart</a>
+      </div>
+
+      <!-- 2 -->
+      <div class="box">
+
+        <img src="/images/WagyuBeefKiriotoshi.png" alt="">
+        <h3>A5 Mt. Fuji Wagyu Beef Kiriotoshi</h3>
+        <div class="stars">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star-half-alt"></i>
+        </div>
+        <span>669฿</span>
+        <a th:href="@{/menus}" class="btn">Add to Cart</a>
+      </div>
+      <!-- 3 -->
+      <div class="box">
+        <img src="/images/Aust.png" alt="">
+        <h3>Australian Wagyu Skirt Steak (Harami)</h3>
+        <div class="stars">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star-half-alt"></i>
+        </div>
+        <span>259฿</span>
+        <a th:href="@{/menus}" class="btn">Add to Cart</a>
+      </div>
+      <!-- 4 -->
+      <div class="box">
+        <img src="/images/FujiWagyu.png" alt="">
+        <h3>A5 Mt. Fuji Wagyu Beef Marinated Yakiniku</h3>
+        <div class="stars">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star-half-alt"></i>
+        </div>
+        <span>549฿</span>
+        <a th:href="@{/menus}" class="btn">Add to Cart</a>
+      </div>
+      <!-- 5 -->
+      <div class="box">
+        <img src="/images/A3WagyuSirloinforBBQ.png" alt="">
+        <h3>A3 Wagyu Sirloin for BBQ</h3>
+        <div class="stars">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star-half-alt"></i>
+        </div>
+        <span>1000฿</span>
+        <a th:href="@{/menus}" class="btn">Add to Cart</a>
+      </div>
+      <!-- 6 -->
+      <div class="box">
+
+        <img src="/images/HokkaidoDreamPork.png" alt="">
+        <h3>Hokkaido Dream Pork Belly BBQ Cut</h3>
+        <div class="stars">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star-half-alt"></i>
+        </div>
+        <span>97฿</span>
+        <a th:href="@{/menus}" class="btn">Add to Cart</a>
+      </div>
+
+    </div>
+
+
+</section>
+
+<!-- dishes section ends -->
+
+<!-- about section starts -->
+
+<section class="about" id="about">
+
+  <h3 class="sub-heading">about us </h3>
+  <h1 class="heading">why should us?</h1>
+
+    <div class="row">
+
+      <div class="image">
+        <img src="https://static.thairath.co.th/media/dFQROr7oWzulq5Fa5ya8LnnWW04bqDht3a14c8PVtW75WrwFG5qaMKmHM4r990D8c9q.jpg" alt="">
+      </div>
+
+      <div class="content">
+        <h3>Best Food In The Country</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga necessitatibus error commodi nihil culpa porro quidem harum et, incidunt quam recusandae vel nisi, eum perspiciatis libero esse? Cumque, esse voluptatum.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam quas quod iure aliquam ex? Accusantium sed aspernatur voluptatum ex hic.</p>
+        <div class="icons-container">
+          <div class="icons">
+            <i class="fas fa-shipping-fast"></i>
+            <span>free delivery</span>
+          </div>
+          <div class="icons">
+            <i class="fas fa-dollar-sign"></i>
+            <span>easy payments</span>
+          </div>
+          <div class="icons">
+            <i class="fas fa-headset"></i>
+            <span>24/7 service</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</section>
+
+<!-- about section ends -->
+
+<!-- review section starts -->
+
+<section class="review" id="review">
+
+  <h3 class="sub-heading">customer's review</h3>
+  <h1 class="heading">what they say</h1>
+
+    <div class="swiper-container review-slider">
+
+      <div class="swiper-wrapper">
+        <!-- 1 -->
+        <div class="swiper-slide slide">
+          <i class="fas fa-quote-right"></i>
+
+          <div class="user">
+
+            <img src="https://scontent.fbkk22-2.fna.fbcdn.net/v/t1.15752-9/384469043_191388450641134_5871192413679141011_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=8cd0a2&_nc_eui2=AeHUiQk2NGKGY9o8W_5Rc0QJMiykY5-1rXUyLKRjn7WtdRGaNeLHzadVLz03_htQtzR1yR4bvUqphQhEv6TF2-fH&_nc_ohc=_Afz2QJY_wIAX-rzmhA&_nc_ht=scontent.fbkk22-2.fna&_nc_e2o=s&oh=03_AdSieXviGg0vmDXX-eFbqPO6IQP2qDxH1dEh9mVrT2-WVA&oe=654E282A" alt="">
+            <div class="user-info">
+              <h3>Toon Nutthawat</h3>
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+              </div>
+            </div>
+
+          </div>
+          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minima cupiditate voluptatum consequuntur quaerat qui officiis possimus. Recusandae quam mollitia porro non corrupti molestiae, aperiam sint officiis voluptatum quasi consectetur minima!</p>
+
+        </div>
+        <!-- 2 -->
+        <div class="swiper-slide slide">
+          <i class="fas fa-quote-right"></i>
+          <div class="user">
+
+            <img src="https://scontent.fbkk22-2.fna.fbcdn.net/v/t1.15752-9/384469043_191388450641134_5871192413679141011_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=8cd0a2&_nc_eui2=AeHUiQk2NGKGY9o8W_5Rc0QJMiykY5-1rXUyLKRjn7WtdRGaNeLHzadVLz03_htQtzR1yR4bvUqphQhEv6TF2-fH&_nc_ohc=_Afz2QJY_wIAX-rzmhA&_nc_ht=scontent.fbkk22-2.fna&_nc_e2o=s&oh=03_AdSieXviGg0vmDXX-eFbqPO6IQP2qDxH1dEh9mVrT2-WVA&oe=654E282A" alt="">
+            <div class="user-info">
+              <h3>Toon Nutthawat</h3>
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+              </div>
+            </div>
+
+          </div>
+          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minima cupiditate voluptatum consequuntur quaerat qui officiis possimus. Recusandae quam mollitia porro non corrupti molestiae, aperiam sint officiis voluptatum quasi consectetur minima!</p>
+
+        </div>
+        <!-- 3 -->
+        <div class="swiper-slide slide">
+          <i class="fas fa-quote-right"></i>
+          <div class="user">
+
+            <img src="https://scontent.fbkk22-2.fna.fbcdn.net/v/t1.15752-9/384469043_191388450641134_5871192413679141011_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=8cd0a2&_nc_eui2=AeHUiQk2NGKGY9o8W_5Rc0QJMiykY5-1rXUyLKRjn7WtdRGaNeLHzadVLz03_htQtzR1yR4bvUqphQhEv6TF2-fH&_nc_ohc=_Afz2QJY_wIAX-rzmhA&_nc_ht=scontent.fbkk22-2.fna&_nc_e2o=s&oh=03_AdSieXviGg0vmDXX-eFbqPO6IQP2qDxH1dEh9mVrT2-WVA&oe=654E282A" alt="">
+            <div class="user-info">
+              <h3>Toon Nutthawat</h3>
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+              </div>
+            </div>
+
+          </div>
+          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minima cupiditate voluptatum consequuntur quaerat qui officiis possimus. Recusandae quam mollitia porro non corrupti molestiae, aperiam sint officiis voluptatum quasi consectetur minima!</p>
+
+        </div>
+        <!-- 4 -->
+        <div class="swiper-slide slide">
+          <i class="fas fa-quote-right"></i>
+          <div class="user">
+
+            <img src="https://scontent.fbkk22-2.fna.fbcdn.net/v/t1.15752-9/384469043_191388450641134_5871192413679141011_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=8cd0a2&_nc_eui2=AeHUiQk2NGKGY9o8W_5Rc0QJMiykY5-1rXUyLKRjn7WtdRGaNeLHzadVLz03_htQtzR1yR4bvUqphQhEv6TF2-fH&_nc_ohc=_Afz2QJY_wIAX-rzmhA&_nc_ht=scontent.fbkk22-2.fna&_nc_e2o=s&oh=03_AdSieXviGg0vmDXX-eFbqPO6IQP2qDxH1dEh9mVrT2-WVA&oe=654E282A" alt="">
+            <div class="user-info">
+              <h3>Toon Nutthawat</h3>
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+              </div>
+            </div>
+
+          </div>
+          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minima cupiditate voluptatum consequuntur quaerat qui officiis possimus. Recusandae quam mollitia porro non corrupti molestiae, aperiam sint officiis voluptatum quasi consectetur minima!</p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+</section>
+
+
+<!-- review section ends -->
+
+<!-- footer section starts -->
+
+<section class="footer">
+
+  <div class="box-container">
+
+    <div class="box">
+
+      <h3>locations</h3>
+      <a href="#" >Thailand</a>
+      <a href="#" >Japan</a>
+
+    </div>
+
+
+    <div class="box">
+
+      <h3>Follow us!</h3>
+      <a href="https://www.instagram.com/yakinikulike.th/" >instagram</a>
+      <a href="https://www.facebook.com/yakinikulike.th" >facebook</a>
+    </div>
+  </div>
+  <div class="credit">copyright @ 2023 by <span>Mr. Web Designer</span></div>
+</section>
+
+
+<!-- footer section ends -->
+
+
+
+
+<!--  <div class="container"  >-->
+<!--    <h1 class="display-6" style="text-align: center;">Welcome to YakiDelivery</h1>-->
+
+<!--    <p><span th:text="${greeting}"></span></p>-->
+
+<!--   <div sec:authorize="isAnonymous()" style="text-align: center;" ></div>-->
+
+<!--    <div sec:authorize="isAuthenticated()" style="text-align: center;">-->
+<!--    <a id="start order button" th:href="@{/menus}" class="btn btn-dark">เริ่มสั่งอาหารได้เลย</a>-->
+<!--    </div>-->
+<!--  </div>-->
+
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<!-- custom js file link -->
+<script src="/js/custom.js"></script>
+
 </html>
