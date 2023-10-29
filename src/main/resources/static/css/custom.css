@@ -267,8 +267,7 @@ section:nth-child(even){
     display:flex;
     flex-wrap: wrap-reverse;
     gap: 1.5rem;
-    align-items: center;
-
+    margin-top: 35px;
 }
 
 .about .row .image{
