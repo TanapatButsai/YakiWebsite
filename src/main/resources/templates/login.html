@@ -17,29 +17,84 @@
     <script th:src="@{/js/bootstrap.min.js}"></script>
     <style>
         /* Add your custom CSS here */
-        .container {
+        body{
+            position: relative;
+            display: flex;
+            background: cornsilk;
+        }
+        .container{
+            background-color: rgba(122, 59, 31, 0.92); /* Replace with your desired background color */
+            border-radius: 15px;
+            margin-top: 150px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            padding: 20px;
+        }
+        .container-1 {
             background-color: rgba(220, 145, 104, 0.93); /* Replace with your desired background color */
             border-radius: 10px;
-            padding: 20px;
-            margin-top: 150px;
+            padding: 35px;
+            margin-left: 75px;
+            align-items: center;
+
+        }
+        .container img{
+            border-radius: 15px;
+            width: 750px;
+        }
+
+        .container h1{
+            color : white;
+
+        }
+
+        .container i{
+            color : white;
 
         }
 
         .display-5{
             text-align: center;
-            color: #eeeeee;
+            color: #000000;
+
         }
 
         .mb-3{
             color: white;
         }
 
+        .btn-login{
+
+            display: inline-block;
+            font-size: 0.75rem;
+            color: white;
+            background: #ff7342;
+            border-radius: .5rem;
+            cursor: pointer;
+            padding:.6rem 1rem;
+
+        }
+        .btn-login:hover{
+
+           background: #27a462;
+        }
+
     </style>
 </head>
 <body>
 <div th:insert="~{fragments/header :: header}"></div>
-<div class="container w-50 p-3" >
-    <h1 class="display-5">Login</h1>
+
+<div class="container">
+
+    <img src="https://res.klook.com/images/fl_lossy.progressive,q_65/c_fill,w_2500,h_1600,f_auto/w_80,x_15,y_15,g_south_west,l_Klook_water_br_trans_yhcmh3/activities/npk6ztwvuvfih0sayjdc/YakinikuLIKEUenoinTokyo.jpg" alt="">
+<div class="container-1" >
+
+
+    <h1 class=" fa-solid fa-user display-5">LOGIN </h1>
+
 
     <form th:action="@{/login}" method="POST">
         <div id="error-msg" th:if="${param.error}" class="alert alert-danger">
@@ -50,7 +105,7 @@
         </div>
         <div class="mb-3">
             <label for="inputUsername">Username</label>
-            <input type="text" name="username" id="inputUsername"
+            <input style="text-transform: none" type="text" name="username" id="inputUsername"
                    class="form-control" required>
         </div>
         <div class="mb-3">
@@ -58,12 +113,10 @@
             <input type="password" name="password" id="inputPassword"
                    class="form-control" required>
         </div>
-        <button id="submit-button" type="submit" class="btn">Login</button>
+        <button id="submit-button" type="submit" class="btn-login">Login</button>
 
     </form>
 </div>
-<div>
-    <img class="responsive-img " src="../static/images/yaki1.png" alt="yakie">
 </div>
 </body>
 </html>

@@ -6,35 +6,82 @@
     <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <script th:src="@{/js/bootstrap.min.js}"></script>
     <link rel="stylesheet" href="/css/custom.css">
+    <!---Font Awesome--->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
         /* Add your custom CSS here */
-        .container {
+        body{
+            position: relative;
+            display: flex;
+            background: cornsilk;
+        }
+        .container{
+            background-color: rgba(122, 59, 31, 0.92); /* Replace with your desired background color */
+            border-radius: 15px;
+            margin-top: 150px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            padding: 20px;
+        }
+        .container-1 {
             background-color: rgba(220, 145, 104, 0.93); /* Replace with your desired background color */
             border-radius: 10px;
-            padding: 20px;
-            margin-top: 150px;
+            padding: 35px;
+            margin-left: 25px;
+            align-items: center;
+
+        }
+        .container img{
+            border-radius: 15px;
+            width: 65%;
+        }
+
+        .container h1{
+            color : white;
 
         }
 
         .display-5{
             text-align: center;
-            color: #eeeeee;
+            color: #000000;
         }
 
         .mb-3{
             color: white;
         }
 
+        .btn-signup{
+
+            display: inline-block;
+            font-size: 0.75rem;
+            color: white;
+            background: #ff7342;
+            border-radius: .5rem;
+            cursor: pointer;
+            padding:.6rem 1rem;
+
+        }
+        .btn-signup:hover{
+
+            background: #27a462;
+        }
+
     </style>
 </head>
 <body>
 <div th:insert="~{fragments/header :: header}"></div>
+<div class="container">
 
-<div class="container w-50 p-3">
-    <h1 class="display-5">Sign Up</h1>
+    <img src="https://ibelievewater.com/wp-content/uploads/2022/07/Y12.jpg" alt="">
+
+    <div class="container-1">
+        <h1 class="fa-solid fa-user-plus display-5">SIGN UP</h1>
 
 
-    <form action="#" th:action="@{/signup}" method="POST">
+        <form action="#" th:action="@{/signup}" method="POST">
 
 
         <div id="success-msg" class="alert alert-success"
@@ -54,7 +101,7 @@
         </div>
         <div class="mb-3">
             <label for="inputUsername">Username</label>
-            <input id="inputUsername" type="input" class="form-control"
+            <input style="text-transform: none" id="inputUsername" type="input" class="form-control"
                    name="username" required>
         </div>
         <div class="mb-3">
@@ -62,15 +109,15 @@
             <input id="inputEmail" type="input" class="form-control"
                    name="email" required>
         </div>
-        <div class="mb-3">
-            <label for="inputPassword">Password</label>
-            <input id="inputPassword" type="password" class="form-control"
-                   name="password" required>
-        </div>
-        <button id="submit-button" type="submit" class="btn">Sign Up</button>
-    </form>
+            <div class="mb-3">
+                <label for="inputPassword">Password</label>
+                <input id="inputPassword" type="password" class="form-control"
+                    name="password" required>
+            </div>
+            <button id="submit-button" type="submit" class="btn-signup">Sign Up</button>
+        </form>
+    </div>
 </div>
-
 
 </body>
 </html>

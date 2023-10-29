@@ -38,7 +38,7 @@ section:nth-child(even){
 .navbar{
     position: fixed;
     top: 0; left: 0; right: 0;
-    background: #fff;
+    background: #fff3cd;
     padding: 1rem 7%;
     display: flex;
     align-items: center;
@@ -104,13 +104,11 @@ section:nth-child(even){
     flex-wrap: wrap;
     gap: 2rem;
     padding-top: 5rem;
-
 }
 
 .home .home-slider .slide .content{
 
-    flex: 1 1 50rem;
-
+    flex: 1 1 45rem;
 }
 
 .home .home-slider .slide .image{
@@ -130,14 +128,14 @@ section:nth-child(even){
 
     color:var(--red);
     font-size: 2.5rem;
-
+    margin-left: 40px;
 }
 
 .home .home-slider .slide .content h3{
 
     color: #2b2f32;
     font-size: 4rem;
-
+    margin-left: 40px;
 }
 
 .home .home-slider .slide .content p{
@@ -146,7 +144,12 @@ section:nth-child(even){
     font-size: 1.5rem;
     padding: .5rem 0;
     line-height: 1.5;
+    margin-left: 55px;
+}
 
+.home .home-slider .slide .content a{
+
+    margin-left: 40px;
 }
 
 .swiper-pagination-bullets {
@@ -491,35 +494,6 @@ section:nth-child(even){
 
 @media (max-width:768px){
 
-    header .icons #menu-bars{
-        display: inline-block;
-    }
-
-    header .navbar {
-        position: absolute;
-        top: 100% ; left: 0; right: 0;
-        background: #fff;
-        border-top: .1rem rgba(0, 0, 0, .2);
-        border-bottom: .1rem rgba(0, 0, 0, .2);
-        padding : 1rem;
-        clip-path: polygon(0 0, 100% 0,100% 0, 0 0);
-    }
-
-    header .navbar a{
-        display: block;
-        padding: 1.5rem;
-        margin: 1rem;
-        font-size: 2rem;
-        background: #eee;
-
-    }
-
-    #search-form #search-box{
-        width: 90%;
-        margin:0 1rem;
-
-    }
-
     .home .home-slider .slide .content h3{
 
         font-size: 5rem;
@@ -541,10 +515,5 @@ section:nth-child(even){
         width: 100%;
     }
 
-    .order form .inputBox .input{
-
-        width: 100%;
-
-    }
 
 }
