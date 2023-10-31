@@ -23,6 +23,22 @@
 
         }
 
+        .btn-confirm{
+
+            display: inline-block;
+            font-size: 0.75rem;
+            color: white;
+            background: #ff7342;
+            border-radius: .5rem;
+            cursor: pointer;
+            padding:.6rem 1rem;
+
+        }
+        .btn-confirm:hover{
+
+            background: #27a462;
+        }
+
     </style>
 </head>
 <body>
@@ -61,7 +77,7 @@
           th:action="@{/admin/orders/{orderId}/finish(orderId=${order.id})}"
           method="POST">
         <button id="submit-button" type="submit"
-                class="btn btn-primary">Finish Order</button>
+                class="btn-confirm">Finish Order</button>
     </form>
 </div>
 </body>
