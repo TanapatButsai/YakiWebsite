@@ -44,6 +44,5 @@ public class MenuService {
                 categoryRepository.findById(request.getCategoryId()).get();
         record.setCategory(category);
         menuRepository.save(record);
-
     }
 }

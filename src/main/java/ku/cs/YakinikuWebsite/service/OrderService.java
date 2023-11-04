@@ -2,11 +2,11 @@ package ku.cs.YakinikuWebsite.service;
 
 import ku.cs.YakinikuWebsite.entity.*;
 import ku.cs.YakinikuWebsite.model.AddCartRequest;
-import ku.cs.YakinikuWebsite.repository.MemberRepository;
-import ku.cs.YakinikuWebsite.repository.MenuRepository;
-import ku.cs.YakinikuWebsite.repository.OrderItemRepository;
-import ku.cs.YakinikuWebsite.repository.PurchaseOrderRepository;
+import ku.cs.YakinikuWebsite.model.DiscountRequest;
+import ku.cs.YakinikuWebsite.repository.*;
+import ku.cs.YakinikuWebsite.status.DiscountStatus;
 import ku.cs.YakinikuWebsite.status.Status;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
@@ -31,6 +31,12 @@ public class OrderService {
 
     @Autowired
     private MemberRepository memberRepository;
+
+    @Autowired
+    private ModelMapper modelMapper;
+
+    @Autowired
+    private DiscountRepository discountRepository;
     private UUID currentOrderId;
 
 
@@ -90,5 +96,37 @@ public class OrderService {
         PurchaseOrder record = orderRepository.findById(orderId).get();
         record.setStatus(Status.DELIVERED);
         orderRepository.save(record);
+    }
+
+    public void addDiscount(DiscountRequest request){
+        Discount record = modelMapper.map(request,Discount.class);
+        record.setDiscountStatus(DiscountStatus.ENABLE);
+        discountRepository.save(record);
+    }
+    public boolean findDiscount(String discountID){
+        if(discountRepository.findByDiscountName(discountID) == null){
+            return true;
+        }
+        return false;
+    }
+    public boolean isDiscountAvailable(String discountID){
+        if(discountRepository.findByDiscountName(discountID) == null){
+            return false;
+        }
+        if(discountRepository.findByDiscountName(discountID).getDiscountStatus().equals(DiscountStatus.ENABLE)
+                && discountRepository.findByDiscountName(discountID) != null){
+            return true;
+        }
+        return false;
+    }
+
+    public void setDisableDiscount(String discountID){
+        Discount discount = discountRepository.findByDiscountName(discountID);
+        discount.setDiscountStatus(DiscountStatus.DISABLE);
+        discountRepository.save(discount);
+    }
+
+    public Discount getDiscountByDiscountName(String discountID){
+        return discountRepository.findByDiscountName(discountID);
     }
 }

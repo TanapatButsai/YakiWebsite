@@ -1,8 +1,9 @@
 package ku.cs.YakinikuWebsite.controller;
 
 
-import ku.cs.YakinikuWebsite.entity.Member;
+import ku.cs.YakinikuWebsite.entity.Discount;
 import ku.cs.YakinikuWebsite.model.AddCartRequest;
+import ku.cs.YakinikuWebsite.model.DiscountRequest;
 import ku.cs.YakinikuWebsite.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -33,6 +34,41 @@ public class OrderController {
         model.addAttribute("cart", orderService.getCurrentOrder(authentication.getName()));
         return "cart";
     }
+
+    @PostMapping("/checkDiscount")
+    public String checkDiscount(@ModelAttribute DiscountRequest discount,Authentication authentication, Model model) {
+            if (orderService.isDiscountAvailable(discount.getDiscountName())) {
+                orderService.setDisableDiscount(discount.getDiscountName());
+                model.addAttribute("available", true);
+                model.addAttribute("discount", orderService.getDiscountByDiscountName(discount.getDiscountName()));
+            } else if (orderService.findDiscount(discount.getDiscountName())) {
+                model.addAttribute("notFound", "This discount is not available.");
+            } else {
+                model.addAttribute("disable", "The discount has already been used.");
+            }
+        model.addAttribute("cart", orderService.getCurrentOrder(authentication.getName()));
+        return "cart";
+    }
+
+
+
+    @GetMapping("/discount/add")
+    public String getAddDiscountPage(Model model){
+        return "discount-add";
+    }
+
+    @PostMapping("/discount/add")
+    public String addDiscount(@ModelAttribute DiscountRequest request, Model model){
+        if(orderService.findDiscount(request.getDiscountName())){
+            orderService.addDiscount(request);
+            model.addAttribute("addDiscount",true);
+        }
+        else{
+            model.addAttribute("duplicateDiscountName","The name is duplicated in the system.");
+        }
+        return "discount-add";
+    }
+
 
 
     @PostMapping
