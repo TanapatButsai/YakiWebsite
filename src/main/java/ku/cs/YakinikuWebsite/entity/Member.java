@@ -1,9 +1,6 @@
 package ku.cs.YakinikuWebsite.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import lombok.Getter;
@@ -25,6 +22,9 @@ public class Member {
     private String password;
     private String name;
     private String email;
+
+    private String address;
+    private String note;
 
     public String getName() {
         return name;
