@@ -13,16 +13,121 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
     <script th:src="@{/js/bootstrap.min.js}"></script>
-    <link rel="stylesheet" href="/css/custom.css">
 
     <style>
         /* Add your custom CSS here */
-        .container {
+        body{
+            position: relative;
+            display: flex;
+            background: cornsilk;
+        }
+        .container{
+            background-color: rgba(122, 59, 31, 0.92); /* Replace with your desired background color */
+            border-radius: 15px;
+            margin-top: 150px;
+            position: relative;
+
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            padding: 20px;
+            height: 50%;
+        }
+        .container-1 {
             background-color: rgba(220, 145, 104, 0.93); /* Replace with your desired background color */
             border-radius: 10px;
-            padding: 20px;
-            margin-top: 150px;
+            padding: 35px;
 
+            align-items: center;
+            height: 50%;
+        }
+        .container h1{
+            color : white;
+
+        }
+
+
+        .mb-3{
+            color: white;
+        }
+
+
+        table{
+            width: 100%;
+            background: rgb(255, 255, 255);
+
+
+            box-shadow: 0 .4rem .8rem #0005;
+            border-radius: .8rem;
+            overflow: hidden;
+        }
+
+        table, th, td{
+            padding:1rem;
+            border-collapse: collapse;
+        }
+
+        thead th{
+            position: sticky;
+            top: 0;
+            left: 0;
+            background-color: rgba(220, 145, 104, 0.93);
+            color: white;
+            text-align: left;
+            font-size: 20px;
+        }
+
+
+        tbody tr:hover{
+            background-color: rgba(255, 184, 148, 0.92);
+        }
+
+        .table-main{
+
+            box-shadow: 0 .4rem .8rem #0005;
+            border-radius: .8rem;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .table_header{
+            width: 100%;
+            height: 10%;
+            background-color: #fff4;
+            padding: .8rem .1rem;
+
+        }
+
+        .btn-cs{
+
+            display: inline-block;
+            font-size: 0.75rem;
+            color: white;
+            background: #ff7342;
+            border-radius: .5rem;
+            cursor: pointer;
+            padding:.6rem 1rem;
+
+        }
+        .btn-cs:hover{
+
+            background: #27a462;
+        }
+
+        .btn-dis{
+            display: inline-block;
+            font-size: 0.75rem;
+            color: white;
+            background: #06490f;
+            border-radius: .5rem;
+            cursor: pointer;
+            padding:.6rem 1rem;
+        }
+
+        .btn-dis:hover{
+
+            background: rgba(14, 255, 110, 0.93);
+            color: rgb(0, 0, 0);
         }
 
     </style>
@@ -31,33 +136,38 @@
 <div th:insert="~{fragments/header :: header}"></div>
 
 
-<div class="container w-50 p-3">
-    <h1 class="display-6">Cart</h1>
+<div class="container">
+    <div class="container-1">
+
+    <h1 style="text-align: center; margin-bottom: 2rem" class="display-6">Cart</h1>
 
 
-    <table class="table table-bordered table-striped table-hover">
-        <thead class="thead-dark">
-        <tr style="text-align: center; vertical-align: top; " class="table-secondary">
-            <th>Drink</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Subtotal</th>
+    <table style="margin-bottom: 2rem">
+        <thead class="table-main">
+
+        <tr style="text-align: center; vertical-align: top; background-color: #ff0000">
+            <th >Drink</th>
+            <th >Price</th>
+            <th >Quantity</th>
+            <th >Subtotal</th>
         </tr>
+
         </thead>
+
         <tbody>
         <tr th:if="${cart ne null}" th:each="item : ${cart.items}" >
-            <td th:text="${item.menu.name}"></td>
-            <td style="text-align: right" th:text="${#numbers.formatDecimal(item.menu.price, 0, 'COMMA', 2, 'POINT')}"></td>
-            <td style="text-align: right" th:text="${item.quantity}"></td>
-            <td style="text-align: right" th:text="${#numbers.formatDecimal(item.getSubtotal(), 0, 'COMMA', 2, 'POINT')}"></td>
+            <td style="text-align: left" th:text="${item.menu.name}"></td>
+            <td style="text-align: left" th:text="${#numbers.formatDecimal(item.menu.price, 0, 'COMMA', 2, 'POINT')}"></td>
+            <td style="text-align: left" th:text="${item.quantity}"></td>
+            <td style="text-align: left" th:text="${#numbers.formatDecimal(item.getSubtotal(), 0, 'COMMA', 2, 'POINT')}"></td>
         </tr>
         </tbody>
+
     </table>
-
-    <p th:if="${discount ne null}" style="text-align: right">Discount: <span th:text="${#numbers.formatDecimal(discount.percentDiscount, 1, 'COMMA', 2, 'POINT')}"></span> %</p>
-    <p th:if="${cart ne null}" style="text-align: right">Total: <span th:text="${#numbers.formatDecimal(cart.getTotal(), 1, 'COMMA', 2, 'POINT')}"></span> Bahts</p>
-    <p th:if="${discount ne null}" style="text-align: right">Total after use discount : <span th:text="${#numbers.formatDecimal(cart.getTotal()*((100-discount.percentDiscount)/100), 1, 'COMMA', 2, 'POINT')}"></span> Bahts</p>
-
+    <div><h3 th:if="${cart ne null}" style="text-align: right; color: black">Total: <span th:text="${#numbers.formatDecimal(cart.getTotal(), 1, 'COMMA', 2, 'POINT')}"></span> Bahts</h3>
+    <h3 th:if="${discount ne null}" style="text-align: right;color: white">Discount:  <span style="color: red" th:text="${#numbers.formatDecimal(discount.percentDiscount, 1, 'COMMA', 2, 'POINT')}">  </span> % </h3>
+    <h3 th:if="${discount ne null}" style="text-align: right;color: white">Total after use discount : <span style="color:#5bff00 " th:text="${#numbers.formatDecimal(cart.getTotal()*((100-discount.percentDiscount)/100), 1, 'COMMA', 2, 'POINT')}"></span> Bahts</h3>
+    </div>
     <form action="#" th:action="@{/orders/checkDiscount}" method="POST">
         <div id="success-msg" class="alert alert-success" th:if="${available}">
             This discount is available.
@@ -76,18 +186,19 @@
                    name="discountName">
           </div>
 
-          <button style="margin-top: 1rem"  type="submit" class="btn-add-able">Check Discount</button>
+          <button style="margin-top: 1rem"  type="submit" class="btn-dis btn-add-able">Check Discount</button>
     </form>
 
     <form action="#" th:action="@{/orders}" method="POST">
         <div style="margin-top: 2rem" id="error-msg" th:if="${cart.checkMinimumPrice.equals(false)}" class="alert alert-danger">
             Must order more than 150 baht.
         </div>
-        <button style="margin-top: 1rem"  id="submit-button" th:disabled="${cart.checkMinimumPrice.equals(false)}" type="submit" class="btn-add">Submit Order</button>
+        <button style="margin-top: 1rem"  id="submit-button" th:disabled="${cart.checkMinimumPrice.equals(false)}" type="submit" class="btn-cs ">Submit Order</button>
     </form>
 
+        </div>
     </div>
 
-</div>
+
 </body>
 </html>
