@@ -52,9 +52,30 @@
         </tbody>
     </table>
 
-
+    <p th:if="${discount ne null}" style="text-align: right">Discount: <span th:text="${#numbers.formatDecimal(discount.percentDiscount, 1, 'COMMA', 2, 'POINT')}"></span> %</p>
     <p th:if="${cart ne null}" style="text-align: right">Total: <span th:text="${#numbers.formatDecimal(cart.getTotal(), 1, 'COMMA', 2, 'POINT')}"></span> Bahts</p>
+    <p th:if="${discount ne null}" style="text-align: right">Total after use discount : <span th:text="${#numbers.formatDecimal(cart.getTotal()*((100-discount.percentDiscount)/100), 1, 'COMMA', 2, 'POINT')}"></span> Bahts</p>
 
+    <form action="#" th:action="@{/orders/checkDiscount}" method="POST">
+        <div id="success-msg" class="alert alert-success" th:if="${available}">
+            This discount is available.
+        </div>
+        <div  class="alert alert-danger" th:if="${disable}">
+            <span th:text="${disable}"></span>
+        </div>
+
+        <div  class="alert alert-danger" th:if="${notFound}">
+            <span th:text="${notFound}"></span>
+        </div>
+
+        <div class="mb-3">
+            <label for="inputID">Discount ID</label>
+            <input id="inputID" type="input" class="form-control"
+                   name="discountName">
+          </div>
+
+          <button  type="submit" class="btn btn-primary">Check Discount</button>
+    </form>
 
     <form action="#" th:action="@{/orders}" method="POST">
         <div id="error-msg" th:if="${cart.checkMinimumPrice.equals(false)}" class="alert alert-danger">
@@ -62,6 +83,7 @@
         </div>
         <button id="submit-button" th:disabled="${cart.checkMinimumPrice.equals(false)}" type="submit" class="btn btn-primary">Submit Order</button>
     </form>
+
 </div>
 </body>
 </html>
