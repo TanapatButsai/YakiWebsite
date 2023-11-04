@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Yakiniku Application</title>
+    <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div th:insert="~{fragments/header :: header}"></div>
+
+<div class="container w-50 p-3">
+    <h1 class="display-5">Add Discount</h1>
+
+
+    <form action="#" th:action="@{/orders/discount/add}" method="POST">
+        <div id="success-msg" class="alert alert-success" th:if="${addDiscount}">
+            Added successfully
+        </div>
+        <div  class="alert alert-danger" th:if="${duplicateDiscountName}">
+            <span th:text="${duplicateDiscountName}"></span>
+        </div>
+        <div class="mb-3">
+            <label for="inputPercent">percentDiscount</label>
+            <input id="inputPercent" type="number" class="form-control" min="1" max="80"
+                   name="percentDiscount" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="inputName">DiscountName</label>
+            <input id="inputName" type="input" class="form-control"
+                   name="discountName" required>
+        </div>
+
+        <button id="submit-button" type="submit" class="btn btn-primary">Add Discount</button>
+    </form>
+</div>
+
+
+
+
+
+
+
+</body>
+</html>

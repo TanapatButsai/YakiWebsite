@@ -32,6 +32,13 @@ public class PurchaseOrder {
         return total;
     }
 
+    public boolean checkMinimumPrice() {
+        double total = 0;
+        for (OrderItem item : items)
+            total += item.getSubtotal();
+        return total > 150;
+    }
+
 
 
 
