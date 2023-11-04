@@ -20,25 +20,21 @@
             border-radius: 15px;
             margin-top: 150px;
             position: relative;
-            display: flex;
+
             align-items: center;
             flex-wrap: wrap;
             gap: 2rem;
             padding: 20px;
+            height: 50%;
         }
         .container-1 {
             background-color: rgba(220, 145, 104, 0.93); /* Replace with your desired background color */
             border-radius: 10px;
             padding: 35px;
-            margin-left: 25px;
+
             align-items: center;
-
+            height: 50%;
         }
-        .container img{
-            border-radius: 15px;
-            width: 60%;
-        }
-
         .container h1{
             color : white;
 
@@ -75,10 +71,8 @@
 <div th:insert="~{fragments/header :: header}"></div>
 <div class="container">
 
-    <img src="https://ibelievewater.com/wp-content/uploads/2022/07/Y12.jpg" alt="">
-
     <div class="container-1">
-        <h1 class="fa-solid fa-user-plus display-5">SIGN UP</h1>
+        <h1 style="text-align: center" class="display-5">SIGN UP</h1>
 
 
         <form action="#" th:action="@{/signup}" method="POST">
@@ -109,12 +103,31 @@
             <input style="text-transform: none" id="inputEmail" type="input" class="form-control"
                    name="email" required>
         </div>
+
             <div class="mb-3">
                 <label for="inputPassword">Password</label>
-                <input id="inputPassword" type="password" class="form-control"
+                <input style="text-transform: none" id="inputPassword" type="password" class="form-control"
                     name="password" required>
             </div>
+
+            <h1 class="display-5" style="text-align: center;">Address</h1>
+
+            <div class="mb-3">
+                <label for="inputAddress">Address details</label>
+
+                <textarea style="text-transform: none" id="inputAddress" type="input" class="form-control"
+                       name="address" required rows="5" cols="50"></textarea>
+
+            </div>
+
+            <div class="mb-3">
+                <label for="inputNote">Note to driver</label>
+                <input style="text-transform: none" id="inputNote" type="input" class="form-control"
+                       name="note" required>
+            </div>
+
             <button id="submit-button" type="submit" class="btn-signup">Sign Up</button>
+
         </form>
     </div>
 </div>
