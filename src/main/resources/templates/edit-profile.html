@@ -100,45 +100,37 @@
 
     <form th:action="@{/edit}" th:object="${member}" method="POST">
 
-    <h1 class="display-5" style="text-align: center;">Edit Profile</h1>
+      <h1 class="display-5" style="text-align: center;">Edit Profile</h1>
+      <div class="mb-3" style = "font-size: 35px">
+        <label for="name">Name : </label>
+        <input id = "name" style="text-transform: none" class="mb-3-p form-control" type = "text" th:field="*{name}"/>
+      </div>
 
+      <div class="mb-3" style="font-size: 35px">
+        <label for="username">Username : </label>
+        <input id = "username" style="text-transform: none" class="mb-3-p form-control" type = "text" th:field="*{username}"/>
+      </div>
 
-    <div class="mb-3" style = "font-size: 35px">
+      <div class="mb-3" style="font-size: 35px">
+        <label for="email"> Email : </label>
+        <input id = "email" style="text-transform: none" class="mb-3-p form-control" type = "text" th:field="*{email}"/>
+      </div>
 
-     <p> Name : <input id = "name" style="text-transform: none" class="mb-3-p form-control" type = "text"  th:field="*{name}"/></p>
+      <br>
+        <h1 class="display-5" style="text-align: center;">Edit Address</h1>
 
-    </div>
+      <div class="mb-3" style="font-size: 35px">
+        <label for="address">Address Detail :</label>
+        <textarea id = "address" style="text-transform: none" class="mb-3-p form-control" type = "text"  th:field="*{address}">
+        </textarea>
+      </div>
 
-    <div class="mb-3" style="font-size: 35px">
+      <div class="mb-3" style="font-size: 35px">
+        <label for="note">Note To Drivers : </label>
+        <input id = "note" style="text-transform: none" class="mb-3-p form-control" type = "text" th:field="*{note}"/>
+      </div>
 
-      <p> Username : <input id = "username"  style="text-transform: none" class="mb-3-p form-control" type = "text"  th:field="*{username}"/></p>
-
-    </div>
-
-    <div class="mb-3" style="font-size: 35px">
-
-      <p> Email : <input id = "email"  style="text-transform: none" class="mb-3-p form-control" type = "text"  th:field="*{email}"/></p>
-
-    </div>
-
-    <br>
-
-    <h1 class="display-5" style="text-align: center;">Edit Address</h1>
-
-    <div class="mb-3" style="font-size: 35px">
-      <p> Address Detail : </p>
-      <textarea <input id = "addressDetail"  style="text-transform: none" class="mb-3-p form-control" type = "text"  th:field="*{address}"/> </textarea>
-
-
-    </div>
-
-    <div class="mb-3" style="font-size: 35px">
-
-      <p> Note To Drivers : <input id = "note" style="text-transform: none" class="mb-3-p form-control" type = "text"  th:field="*{note}"/></p>
-
-    </div>
-
-    <button style="text-align: center;" id="submit-button" type="submit" value="Update" class="btn-location">Update</button>
+      <button style="text-align: center;" id="submit-button" type="submit" value="Update" class="btn-location">Update</button>
 
     </form>
   </div>
