@@ -57,7 +57,10 @@
 
 
     <form action="#" th:action="@{/orders}" method="POST">
-        <button id="submit-button" type="submit" class="btn btn-primary">Submit Order</button>
+        <div id="error-msg" th:if="${cart.checkMinimumPrice.equals(false)}" class="alert alert-danger">
+            Must order more than 150 baht.
+        </div>
+        <button id="submit-button" th:disabled="${cart.checkMinimumPrice.equals(false)}" type="submit" class="btn btn-primary">Submit Order</button>
     </form>
 </div>
 </body>
