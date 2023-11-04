@@ -24,7 +24,7 @@ public class AdminController {
 
     @GetMapping
     public String getAllOrders(Model model) {
-        model.addAttribute("orders", orderService.getAllOrders());
+        model.addAttribute("orders", orderService.getAllOrdersByStatusNotOrder());
         return "order-all";
     }
 

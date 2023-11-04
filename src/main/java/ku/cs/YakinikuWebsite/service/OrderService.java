@@ -8,6 +8,7 @@ import ku.cs.YakinikuWebsite.status.DiscountStatus;
 import ku.cs.YakinikuWebsite.status.Status;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -86,6 +87,9 @@ public class OrderService {
 
     public List<PurchaseOrder> getAllOrders() {
         return orderRepository.findAll();
+    }
+    public List<PurchaseOrder> getAllOrdersByStatusNotOrder(){
+        return orderRepository.getAllByStatusNot(Status.ORDER);
     }
     public PurchaseOrder getById(UUID orderId) {
         return orderRepository.findById(orderId).get();
