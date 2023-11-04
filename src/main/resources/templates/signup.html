@@ -66,6 +66,18 @@
         }
 
     </style>
+
+    <script>
+        function passwordVisible() {
+            var x = document.getElementById("inputPassword");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+
+    </script>
 </head>
 <body>
 <div th:insert="~{fragments/header :: header}"></div>
@@ -108,6 +120,9 @@
                 <label for="inputPassword">Password</label>
                 <input style="text-transform: none" id="inputPassword" type="password" class="form-control"
                     name="password" required>
+                <label>
+                    <input style="margin-top: 1rem" type="checkbox" onclick="passwordVisible()">
+                </label> show password
             </div>
 
             <h1 class="display-5" style="text-align: center;">Address</h1>
