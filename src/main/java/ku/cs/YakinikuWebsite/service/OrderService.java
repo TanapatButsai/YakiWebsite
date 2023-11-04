@@ -54,9 +54,14 @@ public class OrderService {
     public PurchaseOrder getCurrentOrder(String username) {
         if (currentOrderId == null)
             createNewOrder(username);
+        System.out.println(currentOrderId.toString());
         return orderRepository.findById(currentOrderId).get();
     }
 
+    public void removeCurrentOrder(){
+    this.currentOrderId = null;
+
+    }
 
     public void submitOrder() {
         PurchaseOrder currentOrder =

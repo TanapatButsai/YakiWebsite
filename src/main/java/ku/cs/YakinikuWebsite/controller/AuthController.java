@@ -1,6 +1,9 @@
 package ku.cs.YakinikuWebsite.controller;
 
 
+import ku.cs.YakinikuWebsite.entity.PurchaseOrder;
+import ku.cs.YakinikuWebsite.service.OrderService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
@@ -14,7 +17,8 @@ import jakarta.servlet.http.HttpServletResponse;
 @Controller
 public class AuthController {
 
-
+    @Autowired
+    OrderService orderService;
     @GetMapping("/login")
     public String loginView() {
         return "login"; // return login.html
@@ -28,6 +32,7 @@ public class AuthController {
 
 
         if (auth != null){
+            orderService.removeCurrentOrder();
             new SecurityContextLogoutHandler()
                     .logout(request, response, auth);
         }
