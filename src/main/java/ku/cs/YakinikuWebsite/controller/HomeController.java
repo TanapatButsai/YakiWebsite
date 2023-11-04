@@ -46,6 +46,7 @@ public class HomeController {
         model.addAttribute("member",member);
         return "edit-profile";
     }
+
     @PostMapping("/edit")
     public String editPage(
             @ModelAttribute EditProfileRequest editProfileRequest

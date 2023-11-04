@@ -18,6 +18,7 @@ public class ProfileService {
     public void editProfile(EditProfileRequest editProfileRequest, String username){
         Member temp = modelMapper.map(editProfileRequest,Member.class);
         Member record = memberRepository.findByUsername(username);
+        record.setName(temp.getName());
         record.setAddress(temp.getAddress());
         record.setNote(temp.getNote());
         memberRepository.save(record);
