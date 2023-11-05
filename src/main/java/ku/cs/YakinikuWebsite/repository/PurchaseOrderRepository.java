@@ -16,5 +16,7 @@ public interface PurchaseOrderRepository
 
     List<PurchaseOrder> getAllByStatusNot(Status status);
     PurchaseOrder getByMemberUsername(String username);
+
+    List<PurchaseOrder> getAllByMemberUsernameAndStatusNot(String username,Status status);
 }
 

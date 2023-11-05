@@ -4,6 +4,7 @@ package ku.cs.YakinikuWebsite.controller;
 import ku.cs.YakinikuWebsite.entity.Member;
 import ku.cs.YakinikuWebsite.model.EditProfileRequest;
 import ku.cs.YakinikuWebsite.repository.MemberRepository;
+import ku.cs.YakinikuWebsite.service.OrderService;
 import ku.cs.YakinikuWebsite.service.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
@@ -22,6 +23,8 @@ public class HomeController {
     @Autowired
     ProfileService profileService;
 
+    @Autowired
+    private OrderService orderService;
     @RequestMapping("/")
     public String getHomePage(Model model) {
         model.addAttribute("greeting", "welcome to YakiWeb");
@@ -55,5 +58,11 @@ public class HomeController {
 
         profileService.editProfile(editProfileRequest,authentication.getName());
         return "redirect:/profile";
+    }
+
+    @GetMapping("/my-orders")
+    public String getAllMemberOrder(Model model,Authentication authentication){
+        model.addAttribute("orders", orderService.getAllOrdersByStatusNotOrderMember(authentication.getName()));
+        return "order-all";
     }
 }

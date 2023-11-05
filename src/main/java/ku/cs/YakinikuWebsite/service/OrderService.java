@@ -96,6 +96,9 @@ public class OrderService {
     public List<PurchaseOrder> getAllOrdersByStatusNotOrder(){
         return orderRepository.getAllByStatusNot(Status.ORDER);
     }
+    public List<PurchaseOrder> getAllOrdersByStatusNotOrderMember(String username){
+        return orderRepository.getAllByMemberUsernameAndStatusNot(username, Status.ORDER);
+    }
     public PurchaseOrder getById(UUID orderId) {
         return orderRepository.findById(orderId).get();
     }
