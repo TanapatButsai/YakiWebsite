@@ -117,7 +117,7 @@
                             </td>
                             <td style="text-align: left" th:text="${#numbers.formatDecimal(order.total, 1, 'COMMA', 2, 'POINT')}"></td>
                             <td style="text-align: left"><a class="btn btn-primary" th:href="@{/admin/orders/{id}(id=${order.id})}">View</a></td>
-
+                            <td style="text-align: left"><a class="btn btn-primary" th:href="@{/admin/orders/{id}/printReceipt(id=${order.id})}">Receipt</a></td>
                         </tr>
                      </tbody>
                  </table>

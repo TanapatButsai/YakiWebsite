@@ -36,8 +36,11 @@ public class OrderService {
     @Autowired
     private ModelMapper modelMapper;
 
+
     @Autowired
     private DiscountRepository discountRepository;
+
+
     private UUID currentOrderId;
 
 
@@ -106,6 +109,7 @@ public class OrderService {
             record.setStatus(Status.ORDER_RECEIVED);
         } else if (record.getStatus() == Status.ORDER_RECEIVED){
             record.setStatus(Status.DELIVERED);
+
         }
         orderRepository.save(record);
     }

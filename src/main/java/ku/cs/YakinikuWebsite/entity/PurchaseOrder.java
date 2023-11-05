@@ -54,4 +54,12 @@ public class PurchaseOrder {
 
     @OneToMany(mappedBy = "purchaseOrder")
     private List<OrderItem> items = new ArrayList<>();
+
+    public boolean isDelivered(){
+        if(status.equals(Status.DELIVERED)){
+            return true;
+        }
+        return false;
+
+    }
 }
