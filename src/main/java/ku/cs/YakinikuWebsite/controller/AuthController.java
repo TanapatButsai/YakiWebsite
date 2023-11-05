@@ -1,7 +1,7 @@
 package ku.cs.YakinikuWebsite.controller;
 
 
-import ku.cs.YakinikuWebsite.entity.PurchaseOrder;
+import ku.cs.YakinikuWebsite.service.AppInitializeService;
 import ku.cs.YakinikuWebsite.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -19,8 +19,12 @@ public class AuthController {
 
     @Autowired
     OrderService orderService;
+    @Autowired
+    AppInitializeService appInitializeService;
     @GetMapping("/login")
     public String loginView() {
+        appInitializeService.isManagerIsNull();
+        appInitializeService.isCategoryIsNull();
         return "login"; // return login.html
     }
 

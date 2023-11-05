@@ -1,0 +1,43 @@
+version: '3'
+
+
+services:
+
+
+  docker-mysql-yaki:
+    container_name: docker-mysql-yaki
+    image: mysql:latest
+    environment:
+      MYSQL_DATABASE: yakinikuwebsite
+      MYSQL_ROOT_PASSWORD: abc123
+    expose:
+      - 3306
+    ports:
+      - 3306:3306
+    networks:
+      - yaki-network
+    restart: always
+
+
+  yaki-web:
+    restart: on-failure
+    container_name: yaki-web
+    build:
+      context: .
+      dockerfile: yaki.dockerfile
+    image: yaki-web:latest
+    expose:
+      - 8091
+    ports:
+      - 8091:8091
+    networks:
+      - yaki-network
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://docker-mysql-yaki:3306/yakinikuwebsite
+    depends_on:
+      - docker-mysql-yaki
+
+
+networks:
+  yaki-network:
+    driver: bridge

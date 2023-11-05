@@ -8,8 +8,12 @@ import ku.cs.YakinikuWebsite.status.DiscountStatus;
 import ku.cs.YakinikuWebsite.status.Status;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
+
+import javax.mail.MessagingException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -96,14 +100,22 @@ public class OrderService {
     public List<PurchaseOrder> getAllOrdersByStatusNotOrder(){
         return orderRepository.getAllByStatusNot(Status.ORDER);
     }
+    public List<PurchaseOrder> getAllOrdersByStatusNotOrderMember(String username){
+        return orderRepository.getAllByMemberUsernameAndStatusNot(username, Status.ORDER);
+    }
     public PurchaseOrder getById(UUID orderId) {
         return orderRepository.findById(orderId).get();
     }
 
-
-    public void finishOrder(UUID orderId) {
+    public void finishOrder(UUID orderId) throws MessagingException {
         PurchaseOrder record = orderRepository.findById(orderId).get();
-        record.setStatus(Status.DELIVERED);
+        if (record.getStatus() == Status.CONFIRM){
+            triggerMailOrderReceived(record.getMember().getUsername());
+            record.setStatus(Status.ORDER_RECEIVED);
+        } else if (record.getStatus() == Status.ORDER_RECEIVED){
+            triggerMailDelivered(record.getMember().getUsername());
+            record.setStatus(Status.DELIVERED);
+        }
         orderRepository.save(record);
     }
 
@@ -137,5 +149,43 @@ public class OrderService {
 
     public Discount getDiscountByDiscountName(String discountID){
         return discountRepository.findByDiscountName(discountID);
+    }
+
+//    ------------------------ email sender
+    @Autowired
+    private JavaMailSender mailSender;
+
+    public void sendEmail(String toEmail,
+                          String subject,
+                          String body
+    ) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom("fromemail@gmail.com");
+        message.setTo(toEmail);
+        message.setText(body);
+        message.setSubject(subject);
+        mailSender.send(message);
+        System.out.println("Mail Send...");
+    }
+    public void triggerMailConfirm(String username) throws MessagingException {
+        sendEmail(memberRepository.findByUsername(username).getEmail(),
+                "Yakiniku Delivery Submitted order",
+                "You have ordered food from Yakiniku Delivery! " +"\n"+
+                        "We will notify you if the order is Confirm By Admin.");
+
+    }
+    public void triggerMailOrderReceived(String username) throws MessagingException {
+        sendEmail(memberRepository.findByUsername(username).getEmail(),
+                "Yakiniku Delivery Submitted order",
+                "OrderReceived! " +"\n"+
+                        "We will notify you if the order is delivered.");
+
+    }
+    public void triggerMailDelivered(String username) throws MessagingException {
+        sendEmail(memberRepository.findByUsername(username).getEmail(),
+                "Yakiniku Delivery Submitted order",
+                "You have ordered food from Yakiniku Delivery! " +"\n"+
+                        "Delivered.");
+
     }
 }

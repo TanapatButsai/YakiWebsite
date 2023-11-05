@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <title>Kafe Application</title>
@@ -107,14 +108,20 @@
                         <tr th:each="order : ${orders}">
 
                             <td th:text="${#temporals.format(order.timestamp, 'dd/MM/yyyy HH:mm')}"></td>
-                            <td th:text="${order.status}"></td>
-                            <td style="text-align: left" th:text="${#numbers.formatDecimal(order.total, 1, 'COMMA', 2, 'POINT')}"></td>
-                            <td style="text-align: left"><a class="btn-view" th:href="@{/admin/orders/{id}(id=${order.id})}">View</a></td>
+                            <td style="text-align: left" >
+                                <span th:switch="${order.status}">
+                                    <span th:case="${order.status.ORDER}">ORDER</span>
+                                    <span th:case="${order.status.CONFIRM}">CONFIRM</span>
+                                    <span th:case="${order.status.ORDER_RECEIVED}">ORDER RECEIVED</span>
+                                    <span th:case="${order.status.DELIVERED}">DELIVERED</span>
+                                </span>
+                            </td>
+                            <td style="text-align: left" th:text="${#numbers.formatDecimal(order.total, 1, 'COMMA', 2, 'POINT')}" ></td>
+                            <td style="text-align: left"><a class="btn btn-primary" th:href="@{/admin/orders/{id}(id=${order.id})}" sec:authorize="isAuthenticated() and hasRole('ROLE_ADMIN')">View</a></td>
 
                         </tr>
                      </tbody>
                  </table>
-
 
         </main>
 
