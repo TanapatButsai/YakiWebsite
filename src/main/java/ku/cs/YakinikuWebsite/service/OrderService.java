@@ -8,6 +8,7 @@ import ku.cs.YakinikuWebsite.status.DiscountStatus;
 import ku.cs.YakinikuWebsite.status.Status;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -53,9 +54,14 @@ public class OrderService {
     public PurchaseOrder getCurrentOrder(String username) {
         if (currentOrderId == null)
             createNewOrder(username);
+        System.out.println(currentOrderId.toString());
         return orderRepository.findById(currentOrderId).get();
     }
 
+    public void removeCurrentOrder(){
+    this.currentOrderId = null;
+
+    }
 
     public void submitOrder() {
         PurchaseOrder currentOrder =
@@ -87,14 +93,20 @@ public class OrderService {
     public List<PurchaseOrder> getAllOrders() {
         return orderRepository.findAll();
     }
+    public List<PurchaseOrder> getAllOrdersByStatusNotOrder(){
+        return orderRepository.getAllByStatusNot(Status.ORDER);
+    }
     public PurchaseOrder getById(UUID orderId) {
         return orderRepository.findById(orderId).get();
     }
 
-
     public void finishOrder(UUID orderId) {
         PurchaseOrder record = orderRepository.findById(orderId).get();
-        record.setStatus(Status.DELIVERED);
+        if (record.getStatus() == Status.CONFIRM){
+            record.setStatus(Status.ORDER_RECEIVED);
+        } else if (record.getStatus() == Status.ORDER_RECEIVED){
+            record.setStatus(Status.DELIVERED);
+        }
         orderRepository.save(record);
     }
 

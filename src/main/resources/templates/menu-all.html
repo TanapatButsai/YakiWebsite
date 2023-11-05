@@ -80,40 +80,86 @@
 
             background: #27a462;
         }
+
+
+        .container h1{
+            color : white;
+
+        }
+
+
+
+        table{
+            width: 100%;
+            background: rgb(255, 255, 255);
+
+
+            box-shadow: 0 .4rem .8rem #0005;
+            border-radius: .8rem;
+            overflow: hidden;
+        }
+
+        table, th, td{
+            padding:1rem;
+            border-collapse: collapse;
+        }
+
+        thead th{
+            position: sticky;
+            top: 0;
+            left: 0;
+            background-color: rgba(220, 145, 104, 0.93);
+            color: white;
+            text-align: left;
+            font-size: 20px;
+        }
+
+
+        tbody tr:hover{
+            background-color: rgba(255, 184, 148, 0.92);
+        }
+
+        .table-main{
+
+            box-shadow: 0 .4rem .8rem #0005;
+            border-radius: .8rem;
+            overflow: hidden;
+            text-align: center;
+        }
+
+
     </style>
 
 </head>
 <body>
 <div th:insert="~{fragments/header :: header}"></div>
-<!--<div class="image-banner" >-->
-<!--    <a href="#" >-->
-<!--        <img   th:height="290px" src="https://previews.dropbox.com/p/thumb/ACBp48yz1IZ1CmTYWSWq6v_s023sLiRbGanGVoYF7-8FLfof43h1apMd2eWWTl6UXVqLsze_9bHuUMGN6GB74V9uLbOVMXlmiNNc5x1uN2sL2txSUa_x4-HPfqIr9Ya-ep1RO4H1T8obWnWcU0od-WMCudyv2T2xsPZ2-NcvhOD4-o0aQysgSKpHwuxsVF_5FUhtDGdfwGo23WBLdZksDDXSWLoLNlktt5UMB7z8kl4hrTySB9LFYlfh-bkOSs8ZAZO_MbeQg3gGltECTdFRkcSqQ6liCp3ZG8RW62MLhbC8ieUAkb7dZh9q8IDMXbbJ10F0XLAD-tem5pyF48d9o18Z/p.jpeg" alt="Image Button" />-->
-<!--        <img   th:height="290px" src="https://previews.dropbox.com/p/thumb/ACBp48yz1IZ1CmTYWSWq6v_s023sLiRbGanGVoYF7-8FLfof43h1apMd2eWWTl6UXVqLsze_9bHuUMGN6GB74V9uLbOVMXlmiNNc5x1uN2sL2txSUa_x4-HPfqIr9Ya-ep1RO4H1T8obWnWcU0od-WMCudyv2T2xsPZ2-NcvhOD4-o0aQysgSKpHwuxsVF_5FUhtDGdfwGo23WBLdZksDDXSWLoLNlktt5UMB7z8kl4hrTySB9LFYlfh-bkOSs8ZAZO_MbeQg3gGltECTdFRkcSqQ6liCp3ZG8RW62MLhbC8ieUAkb7dZh9q8IDMXbbJ10F0XLAD-tem5pyF48d9o18Z/p.jpeg" alt="Image Button" />-->
-<!--    </a>-->
-<!--</div>-->
 
 <div class="container">
 
 <div class="container-1">
-    <h1 class="display-6">Menu</h1>
+<!--    <h1 class="display-6">Menu</h1>-->
 
-    <table th:each="category : ${categories}" class="table table-bordered table-hover">
+    <table th:each="category : ${categories}" class="table-main table-hover">
 
-        <thead class="thead-dark">
+        <thead class="table-main ">
 
-        <tr class="table-dark">
-            <td colspan="3"><span th:text="${category.name}"></span></td>
-        </tr>
+            <tr style="background-color: rgba(140,57,16,0.92) ; font-size: 30px ; color: white" class="table">
+                <td colspan="3"><span th:text="${category.name}"></span></td>
+            </tr>
+
         </thead>
+
         <tbody>
-        <tr class="category" th:each="menu : ${category.menus}">
-            <td th:text="${menu.name}"></td>
+
+        <tr  style="font-size: 20px" th:each="menu : ${category.menus}">
+            <td style="text-align: left" th:text="${menu.name}"></td>
             <td style="text-align: right" th:text="${#numbers.formatDecimal(menu.price, 1, 'COMMA', 2, 'POINT')}"></td>
             <td style="text-align: center">
                 <a class="btn-view"
-                   th:href="@{/menus/{id}(id=${menu.id})}">View</a>
+                   th:href="@{/menus/{id}(id=${menu.id})}">Order</a>
             </td>
         </tr>
+
         </tbody>
     </table>
 </div>

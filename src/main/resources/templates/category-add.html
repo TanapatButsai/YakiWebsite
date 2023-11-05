@@ -13,12 +13,59 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
         /* Add your custom CSS here */
-        .container {
+        body{
+            position: relative;
+            display: flex;
+            background: cornsilk;
+        }
+        .container{
+            background-color: rgba(122, 59, 31, 0.92); /* Replace with your desired background color */
+            border-radius: 15px;
+            margin-top: 150px;
+            position: relative;
+
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            padding: 20px;
+            height: 50%;
+        }
+        .container-1 {
             background-color: rgba(220, 145, 104, 0.93); /* Replace with your desired background color */
             border-radius: 10px;
-            padding: 20px;
-            margin-top: 150px;
+            padding: 35px;
 
+            align-items: center;
+            height: 50%;
+        }
+        .container h1{
+            color : white;
+
+        }
+
+        .display-5{
+            text-align: center;
+            color: #000000;
+        }
+
+        .mb-3{
+            color: white;
+        }
+
+        .btn-add{
+
+            display: inline-block;
+            font-size: 0.75rem;
+            color: white;
+            background: #ff7342;
+            border-radius: .5rem;
+            cursor: pointer;
+            padding:.6rem 1rem;
+
+        }
+        .btn-add:hover{
+
+            background: #27a462;
         }
 
     </style>
@@ -28,7 +75,10 @@
 <div th:insert="~{fragments/header :: header}"></div>
 
 
-<div class="container w-50 p-3">
+<div class="container">
+    <div class="container-1">
+
+
     <h1 class="display-5">Add Category</h1>
 
 
@@ -38,8 +88,9 @@
             <input id="inputName" type="input" class="form-control"
                    name="name" required>
         </div>
-        <button id="submit-button" type="submit" class="btn btn-primary">Add Category</button>
+        <button id="submit-button" type="submit" class="btn-add">Add Category</button>
     </form>
+</div>
 </div>
 
 

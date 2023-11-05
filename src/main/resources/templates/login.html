@@ -83,6 +83,18 @@
         }
 
     </style>
+
+    <script>
+        function passwordVisible() {
+            var x = document.getElementById("inputPassword");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+
+    </script>
 </head>
 <body>
 <div th:insert="~{fragments/header :: header}"></div>
@@ -93,7 +105,7 @@
 <div class="container-1" >
 
 
-    <h1 class=" fa-solid fa-user display-5">LOGIN </h1>
+    <h1 class="display-5"> LOGIN </h1>
 
 
     <form th:action="@{/login}" method="POST">
@@ -112,8 +124,12 @@
             <label for="inputPassword">Password</label>
             <input type="password" name="password" id="inputPassword"
                    class="form-control" required>
+            <label>
+                <input style="margin-top: 1rem" type="checkbox" onclick="passwordVisible()">
+            </label> show password
         </div>
-        <button id="submit-button" type="submit" class="btn-login">Login</button>
+
+        <button  id="submit-button" type="submit" class="btn-login">Login</button>
 
     </form>
 </div>
