@@ -15,5 +15,6 @@ public interface PurchaseOrderRepository
         extends JpaRepository<PurchaseOrder, UUID> {
 
     List<PurchaseOrder> getAllByStatusNot(Status status);
+    PurchaseOrder getByMemberUsername(String username);
 }
 
