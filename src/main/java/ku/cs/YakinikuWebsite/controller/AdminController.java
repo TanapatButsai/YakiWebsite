@@ -31,6 +31,7 @@ public class AdminController {
     @GetMapping
     public String getAllOrders(Model model) {
         model.addAttribute("orders", orderService.getAllOrdersByStatusNotOrder());
+        model.addAttribute("DELIVERED",Status.DELIVERED);
         return "order-all";
     }
 
@@ -43,14 +44,6 @@ public class AdminController {
         return "order-view";
     }
 
-    @GetMapping("/{id}/printReceipt")
-    public String printReceipt(@PathVariable UUID id,Model model){
-        model.addAttribute("receipt",receiptService.getReceiptById(id));
-        if(orderService.getById(id).getDiscount()!=null) {
-            model.addAttribute("discount", orderService.getDiscountByDiscountName(orderService.getById(id).getDiscount().getDiscountName()));
-        }
-        return "receipt";
-    }
 
 
     @PostMapping("/{orderId}/finish")
