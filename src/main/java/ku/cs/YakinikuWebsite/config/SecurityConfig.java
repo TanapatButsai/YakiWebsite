@@ -35,8 +35,6 @@ public class SecurityConfig {
                                 new AntPathRequestMatcher("/menus/add")).hasRole("ADMIN")
                         .requestMatchers(
                                 new AntPathRequestMatcher("/admin/**")).hasRole("ADMIN")
-                        .requestMatchers(
-                                new AntPathRequestMatcher("/my-orders")).hasRole("CUSTOMER")
                         .anyRequest().authenticated()
 
                 )
