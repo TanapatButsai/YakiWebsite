@@ -79,12 +79,12 @@
     }
     .container-1 .mb-3 span{
 
-      font-size: 35px;
+      font-size: 30px;
 
     }
     .container-1 .mb-3-p {
 
-      font-size: 25px;
+      font-size: 20px;
     }
   </style>
 </head>
@@ -100,20 +100,19 @@
 
     <form th:action="@{/edit}" th:object="${member}" method="POST">
 
-      <h1 class="display-5" style="text-align: center;">Edit Profile</h1>
+      <h1 class="display-5" style="text-align: center;">Edit Name</h1>
       <div class="mb-3" style = "font-size: 35px">
         <label for="name">Name : </label>
         <input id = "name" style="text-transform: none" class="mb-3-p form-control" type = "text" th:field="*{name}"/>
       </div>
 
-      <div class="mb-3" style="font-size: 35px">
-        <label for="username">Username : </label>
-        <input id = "username" style="text-transform: none" class="mb-3-p form-control" type = "text" th:field="*{username}"/>
+      <div class="mb-3" style="font-size: 35px ;">
+
+        Username : <span  style="text-transform: none  ; " th:text="${member.username}"></span>
       </div>
 
       <div class="mb-3" style="font-size: 35px">
-        <label for="email"> Email : </label>
-        <input id = "email" style="text-transform: none" class="mb-3-p form-control" type = "text" th:field="*{email}"/>
+        Email : <span   style="text-transform: none" th:text="${member.email}"></span>
       </div>
 
       <br>
@@ -130,7 +129,7 @@
         <input id = "note" style="text-transform: none" class="mb-3-p form-control" type = "text" th:field="*{note}"/>
       </div>
 
-      <button style="text-align: center;" id="submit-button" type="submit" value="Update" class="btn-location">Update</button>
+      <button  style="text-align: center;" id="submit-button" type="submit" value="Update" class="btn-location">Update</button>
 
     </form>
   </div>

@@ -14,21 +14,106 @@
 
     <script th:src="@{/js/bootstrap.min.js}"></script>
     <style>
-        /* Add your custom CSS here */
-        .container {
-            background-color: rgba(220, 145, 104, 0.93); /* Replace with your desired background color */
-            border-radius: 10px;
-            padding: 20px;
-            margin-top: 150px;
-
+            /* Add your custom CSS here */
+        body{
+            position: relative;
+            display: flex;
+            background: cornsilk;
         }
+            .container{
+                background-color: rgba(122, 59, 31, 0.92); /* Replace with your desired background color */
+                border-radius: 15px;
+                margin-top: 150px;
+                position: relative;
+                display: flex;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: 2rem;
+                padding: 10px;
+            }
+            .container-1 {
+                background-color: rgba(220, 145, 104, 0.93); /* Replace with your desired background color */
+                border-radius: 10px;
+                padding: 35px;
 
-        .btn-confirm{
+                align-items: center;
+                width: 100%;
+            }
+
+            .container-1 table{
+                width: 100%;
+
+            }
+
+            .container-1 h1{
+                text-align: center;
+            }
+
+            .container img{
+                border-radius: 15px;
+                width: 750px;
+            }
+
+            .container h1{
+                color : white;
+
+            }
+
+            .container i{
+                color : white;
+
+            }
+
+            .container h1{
+                color : white;
+
+            }
+
+
+            table{
+                width: 100%;
+                background: rgb(255, 255, 255);
+
+
+                box-shadow: 0 .4rem .8rem #0005;
+                border-radius: .8rem;
+                overflow: hidden;
+            }
+
+            table, th, td{
+                padding:1rem;
+                border-collapse: collapse;
+            }
+
+            thead th{
+                position: sticky;
+                top: 0;
+                left: 0;
+                background-color: rgba(220, 145, 104, 0.93);
+                color: white;
+                text-align: left;
+                font-size: 20px;
+            }
+
+
+            tbody tr:hover{
+                background-color: rgba(255, 184, 148, 0.92);
+            }
+
+            .table-main{
+
+                box-shadow: 0 .4rem .8rem #0005;
+                border-radius: .8rem;
+                overflow: hidden;
+                text-align: center;
+            }
+
+            .btn-confirm{
 
             display: inline-block;
             font-size: 0.75rem;
             color: white;
-            background: #ff7342;
+            background: #04242d;
             border-radius: .5rem;
             cursor: pointer;
             padding:.6rem 1rem;
@@ -36,7 +121,7 @@
         }
         .btn-confirm:hover{
 
-            background: #27a462;
+            background: #042514;
         }
 
     </style>
@@ -45,32 +130,34 @@
 <div th:insert="~{fragments/header :: header}"></div>
 
 
-<div class="container w-50 p-3">
-    <h1 class="display-6">Order</h1>
+<div class="container">
+    <div class="container-1">
+    <h1 style="text-align: center" class="display-6">Order</h1>
 
 
-    <table class="table table-bordered table-striped table-hover">
-        <thead class="thead-dark">
-        <tr style="text-align: center; vertical-align: top; " class="table-secondary">
-            <th>Menu</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Subtotal</th>
+    <table class="table table-bordered  table-hover">
+        <thead style="align-items: center;" class="table-main">
 
-        </tr>
+            <tr>
+                <th style="text-align: center">Menu</th>
+                <th style="text-align: center">Price</th>
+                <th style="text-align: center">Quantity</th>
+                <th style="text-align: center">Subtotal</th>
+
+            </tr>
         </thead>
         <tbody>
         <tr th:if="${order ne null}" th:each="item : ${order.items}" >
             <td th:text="${item.menu.name}"></td>
-            <td style="text-align: right" th:text="${#numbers.formatDecimal(item.menu.price, 1, 'COMMA', 2, 'POINT')}"></td>
-            <td style="text-align: right" th:text="${item.quantity}"></td>
-            <td style="text-align: right" th:text="${#numbers.formatDecimal(item.getSubtotal(), 1, 'COMMA', 2, 'POINT')}"></td>
+            <td style="text-align: center" th:text="${#numbers.formatDecimal(item.menu.price, 1, 'COMMA', 2, 'POINT')}"></td>
+            <td style="text-align: center" th:text="${item.quantity}"></td>
+            <td style="text-align: center" th:text="${#numbers.formatDecimal(item.getSubtotal(), 1, 'COMMA', 2, 'POINT')}"></td>
         </tr>
         </tbody>
     </table>
 
 
-    <p th:if="${order ne null}" style="text-align: right">Total: <span th:text="${#numbers.formatDecimal(order.getTotal(), 1, 'COMMA', 2, 'POINT')}"></span> Bahts</p>
+    <h3 th:if="${order ne null}" style="text-align: right; color: white">Total: <span style="color: #5bff00" th:text="${#numbers.formatDecimal(order.getTotal(), 1, 'COMMA', 2, 'POINT')}"></span> Bahts</h3>
 
 
     <form action="#"
@@ -79,6 +166,7 @@
         <button id="submit-button" type="submit"
                 class="btn-confirm">Finish Order</button>
     </form>
+    </div>
 </div>
 </body>
 </html>
