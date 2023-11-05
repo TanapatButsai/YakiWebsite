@@ -1,7 +1,6 @@
 package ku.cs.YakinikuWebsite.controller;
 
 
-import ku.cs.YakinikuWebsite.entity.Discount;
 import ku.cs.YakinikuWebsite.model.AddCartRequest;
 import ku.cs.YakinikuWebsite.model.DiscountRequest;
 import ku.cs.YakinikuWebsite.service.OrderService;
@@ -75,7 +74,7 @@ public class OrderController {
     public String submitOrder(Model model,Authentication authentication) throws MessagingException {
 
         String username = authentication.getName();
-        senderService.triggerMail(username);
+        senderService.triggerMailConfirm(username);
         orderService.submitOrder();
         model.addAttribute("confirmOrder", true);
         return "home";
