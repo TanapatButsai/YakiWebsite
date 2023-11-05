@@ -98,6 +98,13 @@ public class OrderService {
         orderRepository.save(record);
     }
 
+    public void setDiscount(String discountName){
+        PurchaseOrder purchaseOrder = orderRepository.findById(currentOrderId).get();
+        Discount discount = discountRepository.findByDiscountName(discountName);
+        purchaseOrder.setDiscount(discount);
+        orderRepository.save(purchaseOrder);
+    }
+
     public void addDiscount(DiscountRequest request){
         Discount record = modelMapper.map(request,Discount.class);
         record.setDiscountStatus(DiscountStatus.ENABLE);
@@ -129,4 +136,7 @@ public class OrderService {
     public Discount getDiscountByDiscountName(String discountID){
         return discountRepository.findByDiscountName(discountID);
     }
+
+
+
 }

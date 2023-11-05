@@ -69,9 +69,9 @@
         </tbody>
     </table>
 
-
+    <p th:if="${discount ne null}" style="text-align: right">Discount: <span th:text="${#numbers.formatDecimal(discount.percentDiscount, 1, 'COMMA', 2, 'POINT')}"></span> %</p>
     <p th:if="${order ne null}" style="text-align: right">Total: <span th:text="${#numbers.formatDecimal(order.getTotal(), 1, 'COMMA', 2, 'POINT')}"></span> Bahts</p>
-
+    <p th:if="${discount ne null}" style="text-align: right">Total after use discount : <span th:text="${#numbers.formatDecimal(order.getTotal()*((100-discount.percentDiscount)/100), 1, 'COMMA', 2, 'POINT')}"></span> Bahts</p>
 
     <form action="#"
           th:action="@{/admin/orders/{orderId}/finish(orderId=${order.id})}"

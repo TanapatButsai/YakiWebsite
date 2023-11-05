@@ -31,6 +31,9 @@ public class AdminController {
     @GetMapping("/{orderId}")
     public String getAllOrders(@PathVariable UUID orderId, Model model) {
         model.addAttribute("order", orderService.getById(orderId));
+        if(orderService.getById(orderId).getDiscount()!=null) {
+            model.addAttribute("discount", orderService.getDiscountByDiscountName(orderService.getById(orderId).getDiscount().getDiscountName()));
+        }
         return "order-view";
     }
 
