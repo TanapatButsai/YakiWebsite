@@ -8,8 +8,12 @@ import ku.cs.YakinikuWebsite.status.DiscountStatus;
 import ku.cs.YakinikuWebsite.status.Status;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
+
+import javax.mail.MessagingException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -61,8 +65,8 @@ public class OrderService {
         return orderRepository.findById(currentOrderId).get();
     }
 
-    public void removeCurrentOrder(){
-    this.currentOrderId = null;
+    public void removeCurrentOrder() {
+        this.currentOrderId = null;
 
     }
 
@@ -75,7 +79,7 @@ public class OrderService {
         currentOrderId = null;
     }
 
-    public void order(UUID menuId, AddCartRequest request,String username) {
+    public void order(UUID menuId, AddCartRequest request, String username) {
         if (currentOrderId == null)
             createNewOrder(username);
 
@@ -96,63 +100,111 @@ public class OrderService {
     public List<PurchaseOrder> getAllOrders() {
         return orderRepository.findAll();
     }
-    public List<PurchaseOrder> getAllOrdersByStatusNotOrder(){
+
+    public List<PurchaseOrder> getAllOrdersByStatusNotOrder() {
         return orderRepository.getAllByStatusNot(Status.ORDER);
     }
+
+    public List<PurchaseOrder> getAllOrdersByStatusNotOrderMember(String username) {
+        return orderRepository.getAllByMemberUsernameAndStatusNot(username, Status.ORDER);
+    }
+
     public PurchaseOrder getById(UUID orderId) {
         return orderRepository.findById(orderId).get();
     }
 
-    public void finishOrder(UUID orderId) {
+    public void finishOrder(UUID orderId) throws MessagingException {
         PurchaseOrder record = orderRepository.findById(orderId).get();
-        if (record.getStatus() == Status.CONFIRM){
+        if (record.getStatus() == Status.CONFIRM) {
+            triggerMailOrderReceived(record.getMember().getUsername());
             record.setStatus(Status.ORDER_RECEIVED);
-        } else if (record.getStatus() == Status.ORDER_RECEIVED){
+        } else if (record.getStatus() == Status.ORDER_RECEIVED) {
+            triggerMailDelivered(record.getMember().getUsername());
             record.setStatus(Status.DELIVERED);
 
         }
         orderRepository.save(record);
     }
 
-    public void setDiscount(String discountName){
+    public void setDiscount(String discountName) {
         PurchaseOrder purchaseOrder = orderRepository.findById(currentOrderId).get();
         Discount discount = discountRepository.findByDiscountName(discountName);
         purchaseOrder.setDiscount(discount);
         orderRepository.save(purchaseOrder);
     }
 
-    public void addDiscount(DiscountRequest request){
-        Discount record = modelMapper.map(request,Discount.class);
+    public void addDiscount(DiscountRequest request) {
+        Discount record = modelMapper.map(request, Discount.class);
         record.setDiscountStatus(DiscountStatus.ENABLE);
         discountRepository.save(record);
     }
-    public boolean findDiscount(String discountID){
-        if(discountRepository.findByDiscountName(discountID) == null){
-            return true;
-        }
-        return false;
-    }
-    public boolean isDiscountAvailable(String discountID){
-        if(discountRepository.findByDiscountName(discountID) == null){
-            return false;
-        }
-        if(discountRepository.findByDiscountName(discountID).getDiscountStatus().equals(DiscountStatus.ENABLE)
-                && discountRepository.findByDiscountName(discountID) != null){
+
+    public boolean findDiscount(String discountID) {
+        if (discountRepository.findByDiscountName(discountID) == null) {
             return true;
         }
         return false;
     }
 
-    public void setDisableDiscount(String discountID){
+    public boolean isDiscountAvailable(String discountID) {
+        if (discountRepository.findByDiscountName(discountID) == null) {
+            return false;
+        }
+        if (discountRepository.findByDiscountName(discountID).getDiscountStatus().equals(DiscountStatus.ENABLE)
+                && discountRepository.findByDiscountName(discountID) != null) {
+            return true;
+        }
+        return false;
+    }
+
+    public void setDisableDiscount(String discountID) {
         Discount discount = discountRepository.findByDiscountName(discountID);
         discount.setDiscountStatus(DiscountStatus.DISABLE);
         discountRepository.save(discount);
     }
 
-    public Discount getDiscountByDiscountName(String discountID){
+    public Discount getDiscountByDiscountName(String discountID) {
         return discountRepository.findByDiscountName(discountID);
     }
 
+    //    ------------------------ email sender
+    @Autowired
+    private JavaMailSender mailSender;
 
+    public void sendEmail(String toEmail,
+                          String subject,
+                          String body
+    ) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom("fromemail@gmail.com");
+        message.setTo(toEmail);
+        message.setText(body);
+        message.setSubject(subject);
+        mailSender.send(message);
+        System.out.println("Mail Send...");
+    }
 
+    public void triggerMailConfirm(String username) throws MessagingException {
+        sendEmail(memberRepository.findByUsername(username).getEmail(),
+                "Yakiniku Delivery Submitted order",
+                "You have ordered food from Yakiniku Delivery! " + "\n" +
+                        "We will notify you if the order is Confirm By Admin.");
+
+    }
+
+    public void triggerMailOrderReceived(String username) throws MessagingException {
+        sendEmail(memberRepository.findByUsername(username).getEmail(),
+                "Yakiniku Delivery Submitted order",
+                "OrderReceived! " + "\n" +
+                        "We will notify you if the order is delivered.");
+
+    }
+
+    public void triggerMailDelivered(String username) throws MessagingException {
+        sendEmail(memberRepository.findByUsername(username).getEmail(),
+                "Yakiniku Delivery Submitted order",
+                "You have ordered food from Yakiniku Delivery! " + "\n" +
+                        "Delivered.");
+
+    }
 }

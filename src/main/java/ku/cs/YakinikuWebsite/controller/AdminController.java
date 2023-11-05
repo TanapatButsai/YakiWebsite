@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
+import javax.mail.MessagingException;
 import java.util.UUID;
 
 
@@ -53,7 +54,7 @@ public class AdminController {
 
 
     @PostMapping("/{orderId}/finish")
-    public String finishOrder(@PathVariable UUID orderId, Model model) {
+    public String finishOrder(@PathVariable UUID orderId, Model model) throws MessagingException {
         orderService.finishOrder(orderId);
         if(orderService.getById(orderId).getStatus().equals(Status.DELIVERED)){
             receiptService.receipt(orderId);

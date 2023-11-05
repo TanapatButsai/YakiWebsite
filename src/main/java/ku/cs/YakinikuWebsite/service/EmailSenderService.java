@@ -2,16 +2,11 @@ package ku.cs.YakinikuWebsite.service;
 
 import ku.cs.YakinikuWebsite.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
-import java.io.File;
 
 @Service
 public class EmailSenderService {
@@ -33,12 +28,26 @@ public class EmailSenderService {
         mailSender.send(message);
         System.out.println("Mail Send...");
     }
-    	public void triggerMail(String username) throws MessagingException {
+    	public void triggerMailConfirm(String username) throws MessagingException {
 		sendEmail(memberRepository.findByUsername(username).getEmail(),
 				"Yakiniku Delivery Submitted order",
 				"You have ordered food from Yakiniku Delivery! " +"\n"+
-                        "We will notify you if the order is confirmed.");
+                        "We will notify you if the order is Confirm By Admin.");
 
 	}
+    public void triggerMailOrderReceived(String username) throws MessagingException {
+        sendEmail(memberRepository.findByUsername(username).getEmail(),
+                "Yakiniku Delivery Submitted order",
+                "OrderReceived! " +"\n"+
+                        "We will notify you if the order is delivered.");
+
+    }
+    public void triggerMailDelivered(String username) throws MessagingException {
+        sendEmail(memberRepository.findByUsername(username).getEmail(),
+                "Yakiniku Delivery Submitted order",
+                "You have ordered food from Yakiniku Delivery! " +"\n"+
+                        "Delivered.");
+
+    }
 }
 
