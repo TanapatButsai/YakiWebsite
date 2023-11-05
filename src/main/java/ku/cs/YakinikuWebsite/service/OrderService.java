@@ -100,10 +100,13 @@ public class OrderService {
         return orderRepository.findById(orderId).get();
     }
 
-
     public void finishOrder(UUID orderId) {
         PurchaseOrder record = orderRepository.findById(orderId).get();
-        record.setStatus(Status.DELIVERED);
+        if (record.getStatus() == Status.CONFIRM){
+            record.setStatus(Status.ORDER_RECEIVED);
+        } else if (record.getStatus() == Status.ORDER_RECEIVED){
+            record.setStatus(Status.DELIVERED);
+        }
         orderRepository.save(record);
     }
 

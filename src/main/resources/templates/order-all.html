@@ -113,7 +113,14 @@
                         <tr th:each="order : ${orders}">
 
                             <td th:text="${#temporals.format(order.timestamp, 'dd/MM/yyyy HH:mm')}"></td>
-                            <td th:text="${order.status}"></td>
+                            <td style="text-align: left" >
+                                <span th:switch="${order.status}">
+                                    <span th:case="${order.status.ORDER}">กำลังสั่ง</span>
+                                    <span th:case="${order.status.CONFIRM}">สั่งแล้ว</span>
+                                    <span th:case="${order.status.ORDER_RECEIVED}">รับคำสั่งซื้อแล้ว</span>
+                                    <span th:case="${order.status.DELIVERED}">จัดส่งแล้ว</span>
+                                </span>
+                            </td>
                             <td style="text-align: center" th:text="${#numbers.formatDecimal(order.total, 1, 'COMMA', 2, 'POINT')}"></td>
                             <td style="text-align: center"><a class="btn btn-primary" th:href="@{/admin/orders/{id}(id=${order.id})}">View</a></td>
 
