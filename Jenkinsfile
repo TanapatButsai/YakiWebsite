@@ -1,5 +1,13 @@
 pipeline {
-     agent any
+     agent {
+               docker {
+                    image 'maven:3-amazoncorretto-17'
+                    args '-p 33333:8091'
+               }
+          }
+          environment {
+               HOME = '.'
+          }
      stages {
           stage('Source') {
                steps {
