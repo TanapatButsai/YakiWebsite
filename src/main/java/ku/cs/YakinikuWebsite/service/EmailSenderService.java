@@ -30,9 +30,9 @@ public class EmailSenderService {
     }
     	public void triggerMailConfirm(String username) throws MessagingException {
 		sendEmail(memberRepository.findByUsername(username).getEmail(),
-				"Yakiniku Delivery Submitted order",
+				":) Yakiniku Delivery Submitted order",
 				"You have ordered food from Yakiniku Delivery! " +"\n"+
-                        "We will notify you if the order is Confirm By Admin.");
+                        "We will let you know when the order is Confirm By Admin.");
 
 	}
     public void triggerMailOrderReceived(String username) throws MessagingException {

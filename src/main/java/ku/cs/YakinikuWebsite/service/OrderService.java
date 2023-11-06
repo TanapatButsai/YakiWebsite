@@ -167,25 +167,27 @@ public class OrderService {
         mailSender.send(message);
         System.out.println("Mail Send...");
     }
-    public void triggerMailConfirm(String username) throws MessagingException {
-        sendEmail(memberRepository.findByUsername(username).getEmail(),
-                "Yakiniku Delivery Submitted order",
-                "You have ordered food from Yakiniku Delivery! " +"\n"+
-                        "We will notify you if the order is Confirm By Admin.");
-
-    }
+//    public void triggerMailConfirm(String username) throws MessagingException {
+//        sendEmail(memberRepository.findByUsername(username).getEmail(),
+//                ":) Yakiniku Delivery Submitted order",
+//                "You have ordered food from Yakiniku Delivery! " +"\n"+
+//                        "We will notify you if the order is Confirm By Admin.");
+//
+//    }
     public void triggerMailOrderReceived(String username) throws MessagingException {
         sendEmail(memberRepository.findByUsername(username).getEmail(),
-                "Yakiniku Delivery Submitted order",
-                "OrderReceived! " +"\n"+
-                        "We will notify you if the order is delivered.");
+                ":) Yakiniku Delivery Order Received",
+                    "OrderReceived! " +"\n"+
+                         "We will notify you if the order is delivered.");
 
     }
     public void triggerMailDelivered(String username) throws MessagingException {
         sendEmail(memberRepository.findByUsername(username).getEmail(),
-                "Yakiniku Delivery Submitted order",
-                "You have ordered food from Yakiniku Delivery! " +"\n"+
-                        "Delivered.");
+                "Yakiniku Delivery Food Delivered",
+                "We have delivered your food from Yakiniku Delivery! " +"\n"+
+                        "Thank you for choosing our food" +"\n"+
+                        "We look forward to seeing you again");
+
 
     }
 }
