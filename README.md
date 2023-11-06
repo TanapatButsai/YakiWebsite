@@ -13,7 +13,10 @@
 ## UI Flow
 ![image](https://github.com/TanapatButsai/YakiWebsite/assets/98309698/b26689b5-4723-4677-9c2e-82a61f1eac3c)
 ## การทดสอบ ใช้ unit testing
-       -LoginTest ทดสอบการLoginขึ่้นระบบโดยใช้ Selenium
-       -PurchaseOrderTest -ทดสอบการคิดเงินจากOrderโดยการใช้ Cucumber
+       -LoginTest ทดสอบการLoginขึ่้นระบบโดยใช้ Seleniumโดยการหา WebElement สำหรับ input field ในการกรอกข้อมูล username ใน html
+       กรอกข้อมูลใน input field ที่ต้องการทดสอบและสำหรับช่่อง input password เมื่อหาแล้วทำการ sendkey ที่ต้องการจะทดสอบเข้าไประบบจะ
+       ตรวจสอบการloginให้ว่าสามารถ login ได้หรือไม่
+       -SignupTest
+       -PurchaseOrderTest ทดสอบการคิดเงินจากOrderโดยการใช้ Cucumberในการสร้างfeatureและเขียน Scenario ต่างๆเพื่อใช้ในการทดสอบ
 ## Jira
 https://nutthawatao.atlassian.net/jira/software/projects/SCRUM/boards/1/timeline?shared=&atlOrigin=eyJpIjoiNTgwZDk4ODA4ZjQxNGM4NzgyZjBiZjdlODUxOGIyNWQiLCJwIjoiaiJ9
