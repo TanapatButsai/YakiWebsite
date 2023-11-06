@@ -60,10 +60,16 @@ public class SignupTest {
 
         WebElement submitButton = driver.findElement(By.id("submit-button"));
 
+        WebElement addressField = driver.findElement(By.id("inputAddress"));
+
+        WebElement noteField = driver.findElement(By.id("inputNote"));
+
         nameField.sendKeys("BallJed");
         usernameField.sendKeys("ball1");
         emailField.sendKeys("ball9@gmail.com");
         passwordField.sendKeys("123");
+        passwordField.sendKeys("address01");
+        passwordField.sendKeys("note01");
 
         submitButton.click();
 
