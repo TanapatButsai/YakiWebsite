@@ -5,7 +5,6 @@
   <meta charset="UTF-8">
   <title>Yakiniku Application</title>
   <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-  <link rel="stylesheet" href="/css/custom-receipt.css">
 
   <!---Font Awesome--->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -13,11 +12,13 @@
   <script th:src="@{/js/bootstrap.min.js}"></script>
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css" integrity="sha384-nU14brUcp6StFntEOOEBvcJm4huWjB0OcIeQ3fltAfSmuZFrkAif0T+UtNGlKKQv" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/custom-receipt.css">
+
 </head>
 
 <div th:insert="~{fragments/header :: header}"></div>
 
-<body>
+<body class="body">
 <div class = "my-5 page" size= "A4" >
   <div class = "p-5">
 
@@ -48,9 +49,7 @@
             <h2>Yakiniku Delivery</h2>
             <p class = "address"> 123 Bangkok, <br> Ladyao 10900,
               <br>THAILAND</p>
-            <div class="txm mt-2">ORDERID:
-              XXXXXX
-            </div>
+
 
           </div>
           <div class="col-5">
@@ -59,7 +58,7 @@
 
             <h2 th:text="${receipt.purchaseOrder.member.name}"></h2>
             <p th:text="${receipt.purchaseOrder.member.address}" class = "address"></p>
-            <div class="txm mt-2" display="inline-block">TXN: </div>
+            <div class="txm mt-2" display="inline-block">PurchaseID: </div>
             <div th:text="${receipt.purchaseOrder.member.id}" class="txm mt-2"></div>
 
           </div>
@@ -80,7 +79,7 @@
           <div th:text="${#temporals.format(receipt.deliveryDate, 'dd/MM/yyyy เวลา HH:mm')}" class="col-5">
 
           </div>
-        </div>
+          </div>
       </div>
     </section>
     <!-- Store user -->
@@ -112,7 +111,7 @@
         <div class="col-8">
           <p class="m-0 font-weight-bold"> Note:
           </p>
-          <p th:text="${receipt.purchaseOrder.member.note}"></p>
+          <p> we not accepting refunds in any case.</p>
         </div>
         <div class="col-4">
           <table class="table border-0 table-hover">
@@ -135,13 +134,13 @@
             <td th:if="${discount ne null}">
                 SumTotal :
               </td>
-              <td th:if="${discount ne null}" style="text-align: right"><span th:text="${#numbers.formatDecimal(receipt.purchaseOrder.getTotal()*((100-discount.percentDiscount)/100), 1, 'COMMA', 2, 'POINT')}"></span></td>
+              <td th:if="${discount ne null}" style="text-align: right"><span th:text="${#numbers.formatDecimal(receipt.purchaseOrder.getTotal()*((100 -discount.percentDiscount)/100), 1, 'COMMA', 2, 'POINT')}"></span></td>
             </tr>
             </tfoot>
           </table>
 
           <div class="col-12">
-            <p class = "text-center m-0">Manager Name</p>
+            <p class = "text-center m-0">Manager</p>
           </div>
         </div>
 
@@ -151,7 +150,7 @@
 
     <!-- Cart BG -->
 
-    <img src="cart.jpeg" class= "img-fluid cart-bg" alt="">
+    <img src="/images/cart.jpeg" class= "img-fluid cart-bg" alt="">
     <footer>
       <hr>
       <p class="m-0 text-center">
