@@ -60,9 +60,9 @@ public class LoginTest {
         WebElement submitButton = driver.findElement(By.id("submit-button"));
 
 
-        usernameField.sendKeys("ball1");
+        usernameField.sendKeys("manager");
 
-        passwordField.sendKeys("123");
+        passwordField.sendKeys("manager");
 
         submitButton.click();
 
