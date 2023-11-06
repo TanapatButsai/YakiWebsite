@@ -25,6 +25,7 @@ public class AuthController {
     public String loginView() {
         appInitializeService.isManagerIsNull();
         appInitializeService.isCategoryIsNull();
+        appInitializeService.isDiscountIsNull();
         return "login"; // return login.html
     }
 

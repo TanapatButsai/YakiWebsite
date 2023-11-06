@@ -10,6 +10,11 @@
     --pageShadow : 0 0 0.5cm rgba(0,0,0,0.5);
     --red : rgba(239, 119, 53, 0.92);
 }
+
+*{
+    font-family: 'Nunito', sans-serif;
+
+}
 .navbar{
     position: fixed;
     top: 0; left: 0; right: 0;
