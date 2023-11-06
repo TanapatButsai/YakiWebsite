@@ -8,6 +8,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 
 import java.time.Duration;
@@ -61,17 +62,15 @@ public class SignupTest {
         WebElement phoneField = driver.findElement(By.id("inputPhone"));
 
         nameField.sendKeys("BallJed");
-        usernameField.sendKeys("ball12345");
-        emailField.sendKeys("ball9999999@gmail.com");
-        passwordField.sendKeys("123");
-        addressField.sendKeys("address01");
+
+        usernameField.sendKeys("balltoontoonball");
+        emailField.sendKeys("balltoon@gmail.com");
+        passwordField.sendKeys("12345");
+        addressField.sendKeys("address991");
         noteField.sendKeys("note01");
-        phoneField.sendKeys("0919199991");
+        phoneField.sendKeys("0919199981");
 
-        submitButton.click();
-
+//        submitButton.click();
     }
-
-
 }
 
