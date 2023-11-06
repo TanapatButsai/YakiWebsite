@@ -23,14 +23,16 @@
 
     <section class="top-content bb d-flex justify-content-between">
       <div class="logo">
-        <img src="yaki.png" alt="" class="img-fluid">
+        <img src="/images/yaki.png" alt="" class="img-fluid">
       </div>
       <div class="top-left">
         <div class="graphic-path">
           <p>Receipt</p>
         </div>
         <div class="position-relative">
-          <p>Receipt No. <span>XXXX</span></p>
+
+          <p>:) Yakiniku Delivery Receipt : <span th:text="${receipt.id}"></span></p>
+
         </div>
       </div>
     </section>
@@ -54,11 +56,12 @@
           <div class="col-5">
 
             <p>Client,</p>
-            <h2>Name</h2>
-            <p class = "address"> 777 Brockton Avenue, <br> Abington MA 2351,
-              <br>Vestavia Hills AL</p>
-            <div class="txm mt-2">TXN:
-              XXXXXX</div>
+
+            <h2 th:text="${receipt.purchaseOrder.member.name}"></h2>
+            <p th:text="${receipt.purchaseOrder.member.address}" class = "address"></p>
+            <div class="txm mt-2" display="inline-block">TXN: </div>
+            <div th:text="${receipt.purchaseOrder.member.id}" class="txm mt-2"></div>
+
           </div>
         </div>
         <div class="row extra-info pt-3">
@@ -66,12 +69,16 @@
             <p>Payment Method:
               <span>bKash</span>
             </p>
-            <p>Order Number: <span>#868</span>
+            <p>Order Number: <span th:text="${receipt.purchaseOrder.id}"></span>
             </p>
+
 
           </div>
           <div class="col-5">
-            <p>Deliver Date: <span>10-04.2021</span> </p>
+
+
+          <div th:text="${#temporals.format(receipt.deliveryDate, 'dd/MM/yyyy เวลา HH:mm')}" class="col-5">
+
           </div>
         </div>
       </div>
@@ -84,37 +91,17 @@
           <td>Menu</td>
           <td>Price</td>
           <td>Quantity</td>
-          <td>Total</td>
+          <td>SubTotal</td>
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <td>
-<!--            <div class="media">-->
-<!--              <img src="meat1.jpeg" class="mr-3 img-fluid" alt="Product 01">-->
-<!--              <div class="media-body">-->
-<!--                <p class="mt-0 title">Media heading</p>-->
 
-<!--              </div>-->
-<!--            </div>-->
-          </td>
-          <td>200$</td>
-          <td>1</td>
-          <td>200$</td>
-        </tr>
-        <tr>
-          <td>
-<!--            <div class="media">-->
-<!--              <img src="meat2.jpeg" class="mr-3 img-fluid" alt="Product 01">-->
-<!--              <div class="media-body">-->
-<!--                <p class="mt-0 title">Media heading</p>-->
+        <tr th:if="${receipt ne null}" th:each="item : ${receipt.purchaseOrder.items}" >
+          <td th:text="${item.menu.name}"></td>
+          <td style="text-align: right" th:text="${#numbers.formatDecimal(item.menu.price, 1, 'COMMA', 2, 'POINT')}"></td>
+          <td style="text-align: right" th:text="${item.quantity}"></td>
+          <td style="text-align: right" th:text="${#numbers.formatDecimal(item.getSubtotal(), 1, 'COMMA', 2, 'POINT')}"></td>
 
-<!--              </div>-->
-<!--            </div>-->
-          </td>
-          <td>300$</td>
-          <td>2</td>
-          <td>600$</td>
         </tr>
         </tbody>
       </table>
@@ -125,26 +112,30 @@
         <div class="col-8">
           <p class="m-0 font-weight-bold"> Note:
           </p>
-          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis suscipit illo amet modi omnis incidunt?</p>
+          <p th:text="${receipt.purchaseOrder.member.note}"></p>
         </div>
         <div class="col-4">
           <table class="table border-0 table-hover">
             <tr>
-              <td>Sub Total</td>
-              <td>800$</td>
-            </tr>
-            <tr>
-              <td>Tax:</td>
-              <td>15$</td>
-            </tr>
-            <tr>
               <td>Deliver:</td>
               <td>Free</td>
             </tr>
-            <tfoot>
             <tr>
               <td>Total:</td>
-              <td>815$</td>
+              <td th:text="${#numbers.formatDecimal(receipt.purchaseOrder.getTotal(), 1, 'COMMA', 2, 'POINT')}"></td>
+            </tr>
+            <tr>
+              <td th:if="${discount ne null}">
+                Discount:
+              </td>
+            <td th:if="${discount ne null}" style="text-align: right"> <span th:text="${#numbers.formatDecimal(discount.percentDiscount, 1, 'COMMA', 2, 'POINT')}"></span> %</td>
+              </tr>
+              <tfoot>
+              <tr>
+            <td th:if="${discount ne null}">
+                SumTotal :
+              </td>
+              <td th:if="${discount ne null}" style="text-align: right"><span th:text="${#numbers.formatDecimal(receipt.purchaseOrder.getTotal()*((100-discount.percentDiscount)/100), 1, 'COMMA', 2, 'POINT')}"></span></td>
             </tr>
             </tfoot>
           </table>

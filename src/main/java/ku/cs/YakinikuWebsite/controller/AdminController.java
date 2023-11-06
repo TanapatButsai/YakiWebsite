@@ -1,6 +1,8 @@
 package ku.cs.YakinikuWebsite.controller;
 
 import ku.cs.YakinikuWebsite.service.OrderService;
+import ku.cs.YakinikuWebsite.service.ReceiptService;
+import ku.cs.YakinikuWebsite.status.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,23 +24,34 @@ public class AdminController {
     @Autowired
     private OrderService orderService;
 
+    @Autowired
+    private ReceiptService receiptService;
+
 
     @GetMapping
     public String getAllOrders(Model model) {
         model.addAttribute("orders", orderService.getAllOrdersByStatusNotOrder());
+        model.addAttribute("DELIVERED",Status.DELIVERED);
         return "order-all";
     }
 
     @GetMapping("/{orderId}")
     public String getAllOrders(@PathVariable UUID orderId, Model model) {
         model.addAttribute("order", orderService.getById(orderId));
+        if(orderService.getById(orderId).getDiscount()!=null) {
+            model.addAttribute("discount", orderService.getDiscountByDiscountName(orderService.getById(orderId).getDiscount().getDiscountName()));
+        }
         return "order-view";
     }
+
 
 
     @PostMapping("/{orderId}/finish")
     public String finishOrder(@PathVariable UUID orderId, Model model) throws MessagingException {
         orderService.finishOrder(orderId);
+        if(orderService.getById(orderId).getStatus().equals(Status.DELIVERED)){
+            receiptService.receipt(orderId);
+        }
         return "redirect:/admin/orders";
     }
 

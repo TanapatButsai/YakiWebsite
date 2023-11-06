@@ -34,4 +34,5 @@ public class Member {
     @OneToMany(mappedBy = "member") // "member" is the name of the field in the PurchaseOrder class
     private List<PurchaseOrder> purchaseOrders = new ArrayList<>();
 
+
 }

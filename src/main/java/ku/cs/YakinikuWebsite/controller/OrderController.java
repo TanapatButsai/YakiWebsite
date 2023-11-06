@@ -38,6 +38,7 @@ public class OrderController {
     public String checkDiscount(@ModelAttribute DiscountRequest discount,Authentication authentication, Model model) {
             if (orderService.isDiscountAvailable(discount.getDiscountName())) {
                 orderService.setDisableDiscount(discount.getDiscountName());
+                orderService.setDiscount(discount.getDiscountName());
                 model.addAttribute("available", true);
                 model.addAttribute("discount", orderService.getDiscountByDiscountName(discount.getDiscountName()));
             } else if (orderService.findDiscount(discount.getDiscountName())) {
@@ -72,7 +73,6 @@ public class OrderController {
 
     @PostMapping
     public String submitOrder(Model model,Authentication authentication) throws MessagingException {
-
         String username = authentication.getName();
         senderService.triggerMailConfirm(username);
         orderService.submitOrder();

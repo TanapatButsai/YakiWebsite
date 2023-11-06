@@ -6,7 +6,7 @@
     --darkWhite: #ccc;
     --black : #000000;
     --dark : #615c60;
-    --themeColor : #22b8d1;
+    --themeColor : rgba(220, 145, 104, 0.93);
     --pageShadow : 0 0 0.5cm rgba(0,0,0,0.5);
     --red : rgba(239, 119, 53, 0.92);
 }

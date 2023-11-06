@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Kafe Application</title>
+    <title>Yakiniku Application</title>
     <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <link rel="stylesheet" href="/css/custom.css">
 
@@ -157,7 +157,9 @@
     </table>
 
 
-    <h3 th:if="${order ne null}" style="text-align: right; color: white">Total: <span style="color: #5bff00" th:text="${#numbers.formatDecimal(order.getTotal(), 1, 'COMMA', 2, 'POINT')}"></span> Bahts</h3>
+    <h3 th:if="${discount ne null}" style="text-align: right">Discount: <span th:text="${#numbers.formatDecimal(discount.percentDiscount, 1, 'COMMA', 2, 'POINT')}"></span> %</h3>
+    <h3 th:if="${order ne null}" style="text-align: right">Total: <span th:text="${#numbers.formatDecimal(order.getTotal(), 1, 'COMMA', 2, 'POINT')}"></span> Bahts</h3>
+    <h3 th:if="${discount ne null}" style="text-align: right">Total after use discount : <span th:text="${#numbers.formatDecimal(order.getTotal()*((100 - discount.percentDiscount)/100), 1, 'COMMA', 2, 'POINT')}"></span> Bahts</h3>
 
 
     <form action="#"

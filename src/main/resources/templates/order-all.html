@@ -3,7 +3,7 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
-    <title>Kafe Application</title>
+    <title>Yakiniku Application</title>
     <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <link rel="stylesheet" href="/css/custom.css">
 
@@ -101,7 +101,8 @@
                             <th> DateTime </th>
                             <th> Status </th>
                             <th> Total </th>
-                            <th> Detail </th>
+                            <th> Receipt </th>
+                            <th sec:authorize="isAuthenticated() and hasRole('ROLE_ADMIN')"> Detail </th>
                         </tr>
                      </thead>
                      <tbody>
@@ -116,8 +117,18 @@
                                     <span th:case="${order.status.DELIVERED}">DELIVERED</span>
                                 </span>
                             </td>
-                            <td style="text-align: left" th:text="${#numbers.formatDecimal(order.total, 1, 'COMMA', 2, 'POINT')}" ></td>
-                            <td style="text-align: left"><a class="btn btn-primary" th:href="@{/admin/orders/{id}(id=${order.id})}" sec:authorize="isAuthenticated() and hasRole('ROLE_ADMIN')">View</a></td>
+
+                            <td style="text-align: left" th:text="${#numbers.formatDecimal(order.total, 1, 'COMMA', 2, 'POINT')}"></td>
+                            <td style="text-align: left">
+                                <a class="btn btn-primary"
+                                   th:href="@{/{id}/printReceipt(id=${order.id})}"
+                                   th:if="${order.status == DELIVERED}"
+                                th:e>Receipt</a>
+                            </td>
+                            <td style="text-align: left">
+                                <a class="btn btn-primary" th:href="@{/admin/orders/{id}(id=${order.id})}"
+                                   sec:authorize="isAuthenticated() and hasRole('ROLE_ADMIN')" >View</a>
+                            </td>
 
                         </tr>
                      </tbody>

@@ -46,9 +46,20 @@ public class PurchaseOrder {
     @JoinColumn(name = "member_id") // "member_id" is the foreign key column in the PurchaseOrder table
     private Member member;
 
+    @OneToOne
+    private Discount discount;
+
 
 
 
     @OneToMany(mappedBy = "purchaseOrder")
     private List<OrderItem> items = new ArrayList<>();
+
+    public boolean isDelivered(){
+        if(status.equals(Status.DELIVERED)){
+            return true;
+        }
+        return false;
+
+    }
 }

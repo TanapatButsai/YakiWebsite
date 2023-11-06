@@ -155,10 +155,12 @@
         </tbody>
 
     </table>
+
     <div><h3 th:if="${cart ne null}" style="text-align: right; color: black">Total: <span th:text="${#numbers.formatDecimal(cart.getTotal(), 1, 'COMMA', 2, 'POINT')}"></span> Bahts</h3>
     <h3 th:if="${discount ne null}" style="text-align: right;color: white">Discount:  <span style="color: red" th:text="${#numbers.formatDecimal(discount.percentDiscount, 1, 'COMMA', 2, 'POINT')}">  </span> % </h3>
     <h3 th:if="${discount ne null}" style="text-align: right;color: white">Total after use discount : <span style="color:#5bff00 " th:text="${#numbers.formatDecimal(cart.getTotal()*((100 -discount.percentDiscount)/100), 1, 'COMMA', 2, 'POINT')}"></span> Bahts</h3>
     </div>
+
     <form action="#" th:action="@{/orders/checkDiscount}" method="POST">
         <div id="success-msg" class="alert alert-success" th:if="${available}">
             This discount is available.
@@ -177,7 +179,8 @@
                    name="discountName">
           </div>
 
-          <button style="margin-top: 1rem"  type="submit" class="btn-dis btn-add-able">Check Discount</button>
+          <button style="margin-top: 1rem"  type="submit" class="btn-dis btn-add-able">Use Discount</button>
+
     </form>
 
     <form action="#" th:action="@{/orders}" method="POST">
