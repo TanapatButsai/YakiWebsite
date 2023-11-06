@@ -35,6 +35,8 @@ public class LoginTest {
     @BeforeEach
     public void beforeEach() {
         driver.get("http://localhost:" + port + "/login");
+        WebElement usernameField = wait.until(webDriver ->
+                webDriver.findElement(By.id("inputUsername")));
     }
 
     @AfterEach
