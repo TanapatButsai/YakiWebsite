@@ -63,14 +63,15 @@ public class SignupTest {
         WebElement addressField = driver.findElement(By.id("inputAddress"));
 
         WebElement noteField = driver.findElement(By.id("inputNote"));
+        WebElement phoneField = driver.findElement(By.id("inputPhone"));
 
         nameField.sendKeys("BallJed");
         usernameField.sendKeys("ball1");
         emailField.sendKeys("ball9@gmail.com");
         passwordField.sendKeys("123");
-        passwordField.sendKeys("address01");
-        passwordField.sendKeys("note01");
-
+        addressField.sendKeys("address01");
+        noteField.sendKeys("note01");
+        phoneField.sendKeys("0919199991");
         submitButton.click();
 
     }
