@@ -211,7 +211,8 @@ public class OrderService {
                 "Yakiniku Delivery Food Delivered",
                 "We have delivered your food from Yakiniku Delivery! " +"\n"+
                         "Thank you for choosing our food" +"\n"+
-                        "We look forward to seeing you again");
+                        "We look forward to seeing you again"+"\n"+
+                        "You can check the receipt in our Application"                                           );
 
 
 
