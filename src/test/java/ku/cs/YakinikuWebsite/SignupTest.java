@@ -51,27 +51,23 @@ public class SignupTest {
     void testSignup() {
         WebElement nameField = wait.until(webDriver ->
                 webDriver.findElement(By.id("inputName")));
+        WebElement submitButton = driver.findElement(By.id("submit-button-signup"));
 
         WebElement usernameField = driver.findElement(By.id("inputUsername"));
-
         WebElement emailField = driver.findElement(By.id("inputEmail"));
-
         WebElement passwordField = driver.findElement(By.id("inputPassword"));
-
-        WebElement submitButton = driver.findElement(By.id("submit-button"));
-
         WebElement addressField = driver.findElement(By.id("inputAddress"));
-
         WebElement noteField = driver.findElement(By.id("inputNote"));
         WebElement phoneField = driver.findElement(By.id("inputPhone"));
 
         nameField.sendKeys("BallJed");
-        usernameField.sendKeys("ball1");
-        emailField.sendKeys("ball9@gmail.com");
+        usernameField.sendKeys("ball12345");
+        emailField.sendKeys("ball9999999@gmail.com");
         passwordField.sendKeys("123");
         addressField.sendKeys("address01");
         noteField.sendKeys("note01");
         phoneField.sendKeys("0919199991");
+
         submitButton.click();
 
     }
