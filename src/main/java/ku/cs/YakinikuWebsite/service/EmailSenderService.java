@@ -32,7 +32,10 @@ public class EmailSenderService {
 		sendEmail(memberRepository.findByUsername(username).getEmail(),
 				":) Yakiniku Delivery Submitted order",
 				"You have ordered food from Yakiniku Delivery! " +"\n"+
-                        "We will let you know when the order is Confirm By Admin.");
+                        "We will let you know when the order is Confirm By Admin." +"\n" +
+                        "Please pay as soon as possible to " + "\n" +
+                        "Account number:83464937129"
+        );
 
 	}
     public void triggerMailOrderReceived(String username) throws MessagingException {

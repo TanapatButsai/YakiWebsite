@@ -194,7 +194,9 @@ public class OrderService {
         sendEmail(memberRepository.findByUsername(username).getEmail(),
                 ":) Yakiniku Delivery Order Received",
                 "OrderReceived! " + "\n" +
-                        "We will notify you if the order is delivered.");
+                        "We will notify you if the order is delivered."
+
+        );
     }
 
     public void triggerMailConfirm(String username) throws MessagingException {
