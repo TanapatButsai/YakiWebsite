@@ -19,8 +19,9 @@
 cd /xx/xx/YakiWebsite  (เพื่อไปยังโฟลเดอร์ที่ดาวโหลด)<br>
 mvn clean package -DskipTests<br>
 docker-compose up -d<br>
-![image](https://github.com/TanapatButsai/YakiWebsite/assets/98451881/a09004d0-d7c1-487a-bafb-8d914f877109)
-
+![image](https://github.com/TanapatButsai/YakiWebsite/assets/98451881/a09004d0-d7c1-487a-bafb-8d914f877109)<br><br><br>
+![image](https://github.com/TanapatButsai/YakiWebsite/assets/98451881/76b7eb18-2037-49b1-b4ed-0b25bd49bbf0)
+<br><br>
 4.พิมคำสั่งดังนี้เพื่อปิด<br>
 docker-compose down<br>
 ![image](https://github.com/TanapatButsai/YakiWebsite/assets/98451881/655847a8-ed84-4d08-8270-d099ca4e1d28)<br>
