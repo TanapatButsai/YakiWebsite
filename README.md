@@ -1,4 +1,4 @@
-![image](https://github.com/TanapatButsai/YakiWebsite/assets/98451881/1af5c66d-e503-476d-acc3-d634fe1d8364)![image](https://github.com/TanapatButsai/YakiWebsite/assets/98451881/75fbeb0a-18c1-4fff-9572-219bea3333a0)# Yakiniku Delivery
+(https://github.com/TanapatButsai/YakiWebsite/assets/98451881/75fbeb0a-18c1-4fff-9572-219bea3333a0)# Yakiniku Delivery
 ## รายชื่อสมาชิก<br>
        6410450770 เจษฎากร บุญเลิศ
        6410450940 ณัฐวรรธน์ อ้อนประเสริฐ
